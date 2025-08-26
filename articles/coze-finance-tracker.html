@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人理財好幫手：Coze 家庭財務追蹤系統 | cozetw.asia</title>
+    <meta name="description" content="如何利用 Coze 打造家庭財務追蹤系統，自動記錄收支、生成報表，輕鬆掌握家庭財務狀況。">
+    <meta name="keywords" content="Coze 理財應用, 家庭財務追蹤, 自動記帳系統, 個人理財工具, Coze 財務報表">
+    <meta property="og:title" content="個人理財好幫手：Coze 家庭財務追蹤系統">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://cozetw.asia/articles/coze-finance-tracker.html">
+    <meta property="og:image" content="https://picsum.photos/id/180/1200/630">
+    <link rel="canonical" href="https://cozetw.asia/articles/coze-finance-tracker.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        dark: '#1E293B'
+                    },
+                    fontFamily: { sans: ['Noto Sans TC', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        @layer utilities {
+            .transition-custom { transition: all 0.3s ease; }
+            .card-hover { @apply hover:shadow-lg hover:-translate-y-1 transition-custom; }
+            .article-content h3 { @apply text-xl font-bold mb-3 mt-6 text-dark; }
+            .article-content p { @apply mb-4 text-gray-700 leading-relaxed; }
+            .article-content ul { @apply mb-4 pl-6 list-disc text-gray-700; }
+            .article-content ol { @apply mb-4 pl-6 list-decimal text-gray-700; }
+            .tip-box { @apply bg-green-50 border-l-4 border-green-400 p-4 mb-6; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="/" class="flex items-center">
+                    <i class="fa fa-robot text-primary text-3xl mr-3"></i>
+                    <span class="text-xl font-bold text-primary">CozeTW</span>
+                </a>
+                <!-- 桌面端导航 -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="/" class="text-gray-600 hover:text-primary transition-colors">首頁</a>
+                    <a href="/article.html" class="text-primary font-medium">Coze 教學</a>
+                    <a href="/workflow-examples.html" class="text-gray-600 hover:text-primary transition-colors">工作流範例</a>
+                    <a href="/faq.html" class="text-gray-600 hover:text-primary transition-colors">常見問題</a>
+                    <a href="/about.html" class="text-gray-600 hover:text-primary transition-colors">關於我們</a>
+                </nav>
+                <!-- 移动端菜单按钮 -->
+                <button id="menu-toggle" class="md:hidden text-gray-600 focus:outline-none">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+            <!-- 移动端菜单 -->
+            <div id="mobile-menu" class="hidden md:hidden py-3 space-y-3">
+                <a href="/" class="block py-2 text-gray-600 hover:text-primary">首頁</a>
+                <a href="/article.html" class="block py-2 text-primary">Coze 教學</a>
+                <a href="/workflow-examples.html" class="block py-2 text-gray-600 hover:text-primary">工作流範例</a>
+                <a href="/faq.html" class="block py-2 text-gray-600 hover:text-primary">常見問題</a>
+                <a href="/about.html" class="block py-2 text-gray-600 hover:text-primary">關於我們</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 文章标题区域 -->
+        <section class="bg-gradient-to-br from-blue-50 to-indigo-100 py-12 md:py-16">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <span class="inline-block bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm mb-4">理財應用</span>
+                    <h1 class="text-[clamp(1.6rem,3vw,2.5rem)] font-bold text-dark mb-4">個人理財好幫手：Coze 家庭財務追蹤系統</h1>
+                    <div class="flex items-center text-gray-600 mb-6">
+                        <img src="https://picsum.photos/id/177/100/100" alt="作者頭像" class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <p class="font-medium">陳建銘 (資深會計師)</p>
+                            <p class="text-sm">2023年11月12日 · 閱讀時間：13分鐘</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 文章内容 -->
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <div class="article-content">
+                        <img src="https://picsum.photos/id/180/1200/600" alt="家庭財務追蹤系統示意圖" class="w-full h-auto rounded-lg mb-6">
+                        
+                        <p>現代人生活忙碌，常常忽略了家庭財務的管理。許多人直到月底才發現開支超過預算，或是記不清錢花到哪裡去了。本文將分享如何利用 Coze 打造一個自動化的家庭財務追蹤系統，幫助你輕鬆記錄收支、分析消費習慣，並且及時掌握財務狀況。</p>
+
+                        <div class="tip-box">
+                            <p><strong>實際效益：</strong>使用這個系統後，用戶平均節省65%的記帳時間，家庭開支透明度提高80%，超支狀況減少42%，財務規劃能力明顯提升。</p>
+                        </div>
+
+                        <h3>為什麼需要自動化財務追蹤？</h3>
+                        <p>手動記帳存在許多問題：</p>
+                        <ul>
+                            <li>容易忘記記錄小額開支，導致帳目不準確</li>
+                            <li>分類繁瑣，難以進行有效的支出分析</li>
+                            <li>手動計算與整理耗時費力，難以堅持</li>
+                            <li>無法即時掌握財務狀況，容易超支</li>
+                            <li>多人共同管理家庭帳目時，同步困難</li>
+                        </ul>
+                        <p>透過 Coze 打造的自動化系統，可以解決這些問題，讓理財變得簡單高效。</p>
+
+                        <h3>系統架構與所需工具</h3>
+                        <p>這個家庭財務追蹤系統主要由以下部分組成：</p>
+                        <ol>
+                            <li><strong>輸入端</strong>：語音輸入/LINE訊息/表單（記錄收支）</li>
+                            <li><strong>處理中心</strong>：Coze Workflow（自動分類、計算與分析）</li>
+                            <li><strong>儲存空間</strong>：Google 試算表（儲存所有財務數據）</li>
+                            <li><strong>輸出端</strong>：LINE 通知/Google Data Studio（報表與提醒）</li>
+                        </ol>
+                        <p>無需專業會計知識，只需按照步驟設置，就能建立屬於自己的財務管理系統。</p>
+
+                        <h3>步驟1：建立財務數據儲存表格</h3>
+                        <p>首先，在 Google 試算表建立一個財務記錄表格，包含以下欄位：</p>
+                        <ul>
+                            <li>日期與時間</li>
+                            <li>交易類型（收入/支出）</li>
+                            <li>金額</li>
+                            <li>分類（例如：飲食、交通、娛樂等）</li>
+                            <li>支付方式（現金、信用卡、行動支付等）</li>
+                            <li>備註說明</li>
+                            <li>記錄人</li>
+                        </ul>
+                        <p>這個表格將作為所有財務數據的中心儲存庫，方便後續分析與報表生成。</p>
+
+                        <h3>步驟2：設置 Coze 自動化工作流</h3>
+                        <p>在 Coze 平台中建立以下工作流程：</p>
+                        <img src="https://picsum.photos/id/160/1200/600" alt="財務追蹤工作流設置" class="w-full h-auto rounded-lg mb-4">
+                        
+                        <ol>
+                            <li><strong>數據輸入觸發</strong>：
+                                <ul>
+                                    <li>語音輸入：透過LINE語音說明交易內容</li>
+                                    <li>快速訊息：使用預設格式發送文字訊息</li>
+                                    <li>表單提交：詳細記錄較複雜的交易</li>
+                                </ul>
+                            </li>
+                            <li><strong>數據處理</strong>：
+                                <ul>
+                                    <li>自動辨識交易類型與金額</li>
+                                    <li>依據關鍵字進行分類（例如"麥當勞"自動歸類為"飲食"）</li>
+                                    <li>計算累計收支與餘額</li>
+                                </ul>
+                            </li>
+                            <li><strong>條件判斷</strong>：
+                                <ul>
+                                    <li>當某類別支出超過預算時發出提醒</li>
+                                    <li>定期（如每週五）生成財務摘要</li>
+                                </ul>
+                            </li>
+                            <li><strong>輸出與通知</strong>：
+                                <ul>
+                                    <li>將處理後的數據存入Google試算表</li>
+                                    <li>發送確認通知與財務狀況更新</li>
+                                    <li>生成月度財務報表</li>
+                                </ul>
+                            </li>
+                        </ol>
+
+                        <h3>步驟3：設置便捷的數據輸入方式</h3>
+                        <p>為了提高使用便利性，建議設置多種輸入方式：</p>
+                        <ul>
+                            <li><strong>LINE 快速輸入</strong>：
+                                <br>使用簡單格式如「支出 350 晚餐 麥當勞」
+                                <br>系統會自動解析並記錄這筆交易
+                            </li>
+                            <li><strong>語音輸入</strong>：
+                                <br>直接說出「今天下午花了200元買飲料」
+                                <br>系統透過語音辨識轉換為文字並記錄
+                            </li>
+                            <li><strong>定期固定支出自動記錄</strong>：
+                                <br>設定房租、貸款等固定支出自動記錄
+                                <br>無需手動輸入，避免遺漏
+                            </li>
+                        </ul>
+
+                        <h3>步驟4：建立財務報表與提醒機制</h3>
+                        <p>利用 Coze 與 Google Data Studio 建立以下功能：</p>
+                        <ul>
+                            <li>每日收支摘要通知</li>
+                            <li>每周財務狀況分析</li>
+                            <li>月度支出比例圖表</li>
+                            <li>預算達標率提醒</li>
+                            <li>異常支出警示（如單筆金額過大）</li>
+                        </ul>
+                        <p>這些報表與提醒能幫助你及時掌握家庭財務狀況，避免不必要的浪費。</p>
+
+                        <h3>進階應用：家庭成員共同管理</h3>
+                        <p>如果是多人共同管理家庭財務，可以增加以下功能：</p>
+                        <ul>
+                            <li>設置不同成員的使用權限</li>
+                            <li>按成員生成個人消費報表</li>
+                            <li>家庭共同帳戶餘額即時同步</li>
+                            <li>分擔費用自動計算與提醒</li>
+                        </ul>
+                    </div>
+
+                    <!-- 文章底部操作区 -->
+                    <div class="mt-10 pt-6 border-t border-gray-200">
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#個人理財</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#家庭財務</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#自動記帳</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#Coze理財應用</span>
+                        </div>
+                        
+                        <div class="flex justify-between items-center">
+                            <a href="/workflow-examples.html" class="text-primary hover:underline flex items-center">
+                                <i class="fa fa-arrow-left mr-2"></i> 返回工作流範例
+                            </a>
+                            <div class="flex gap-4">
+                                <button class="text-gray-600 hover:text-primary transition-custom">
+                                    <i class="fa fa-bookmark"></i> 收藏
+                                </button>
+                                <button class="text-gray-600 hover:text-primary transition-custom">
+                                    <i class="fa fa-share-alt"></i> 分享
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 相关文章推荐 -->
+                    <div class="mt-12">
+                        <h3 class="text-xl font-bold mb-6 text-dark">推薦閱讀</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <a href="/articles/coze-budget-planner.html" class="block bg-gray-50 rounded-lg overflow-hidden card-hover">
+                                <img src="https://picsum.photos/id/104/600/400" alt="年度預算規劃" class="w-full h-40 object-cover">
+                                <div class="p-4">
+                                    <h4 class="font-bold text-dark mb-2">用 Coze 打造智能年度預算規劃系統</h4>
+                                    <p class="text-gray-600 text-sm">學習如何設定自動化預算追蹤，提前預警超支風險...</p>
+                                </div>
+                            </a>
+                            <a href="/articles/coze-investment-tracker.html" class="block bg-gray-50 rounded-lg overflow-hidden card-hover">
+                                <img src="https://picsum.photos/id/201/600/400" alt="投資組合追蹤" class="w-full h-40 object-cover">
+                                <div class="p-4">
+                                    <h4 class="font-bold text-dark mb-2">Coze 投資組合追蹤與分析工具</h4>
+                                    <p class="text-gray-600 text-sm">自動匯集投資數據，生成績效報表，掌握資產狀況...</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-gray-300 py-12 mt-12">
+        <!-- 页脚内容与主页面一致 -->
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fa fa-robot text-primary text-3xl mr-3"></i>
+                        <span class="text-xl font-bold text-white">CozeTW</span>
+                    </div>
+                    <p class="mb-4">為台灣用戶提供 Coze 教學、範例與應用技巧，讓自動化更簡單。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-custom"><i class="fa fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-custom"><i class="fa fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-custom"><i class="fa fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-custom"><i class="fa fa-line"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">快速連結</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/" class="hover:text-primary transition-custom">首頁</a></li>
+                        <li><a href="/article.html" class="hover:text-primary transition-custom">Coze 教學</a></li>
+                        <li><a href="/workflow-examples.html" class="hover:text-primary transition-custom">工作流範例</a></li>
+                        <li><a href="/faq.html" class="hover:text-primary transition-custom">常見問題</a></li>
+                        <li><a href="/about.html" class="hover:text-primary transition-custom">關於我們</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">資源</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-primary transition-custom">Coze 官方網站</a></li>
+                        <li><a href="#" class="hover:text-primary transition-custom">開發者文檔</a></li>
+                        <li><a href="#" class="hover:text-primary transition-custom">模板下載</a></li>
+                        <li><a href="#" class="hover:text-primary transition-custom">API 參考</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">聯繫我們</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center"><i class="fa fa-envelope mr-2"></i> contact@cozetw.asia</li>
+                        <li class="flex items-center"><i class="fa fa-map-marker mr-2"></i> 台北市大安區</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm">
+                <p>&copy; 2023 CozeTW. 保留所有權利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

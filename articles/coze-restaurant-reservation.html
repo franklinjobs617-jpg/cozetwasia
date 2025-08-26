@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>餐廳如何用 Coze 打造 LINE 訂位機器人 | cozetw.asia</title>
+    <meta name="description" content="詳細教學：餐廳業者如何使用 Coze 快速打造 LINE 訂位機器人，自動處理預約、發送提醒，節省人力成本。">
+    <meta name="keywords" content="Coze 餐廳應用, LINE 訂位機器人, 餐廳自動化, Coze 商業應用, 訂位系統">
+    <meta property="og:title" content="餐廳如何用 Coze 打造 LINE 訂位機器人">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://cozetw.asia/articles/coze-restaurant-reservation.html">
+    <meta property="og:image" content="https://picsum.photos/id/292/1200/630">
+    <link rel="canonical" href="https://cozetw.asia/articles/coze-restaurant-reservation.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        dark: '#1E293B'
+                    },
+                    fontFamily: { sans: ['Noto Sans TC', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        @layer utilities {
+            .transition-custom { transition: all 0.3s ease; }
+            .card-hover { @apply hover:shadow-lg hover:-translate-y-1 transition-custom; }
+            .article-content h3 { @apply text-xl font-bold mb-3 mt-6 text-dark; }
+            .article-content p { @apply mb-4 text-gray-700 leading-relaxed; }
+            .article-content ul { @apply mb-4 pl-6 list-disc text-gray-700; }
+            .article-content ol { @apply mb-4 pl-6 list-decimal text-gray-700; }
+            .highlight-box { @apply bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="/" class="flex items-center">
+                    <i class="fa fa-robot text-primary text-3xl mr-3"></i>
+                    <span class="text-xl font-bold text-primary">CozeTW</span>
+                </a>
+                <!-- 桌面端导航 -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="/" class="text-gray-600 hover:text-primary transition-colors">首頁</a>
+                    <a href="/article.html" class="text-primary font-medium">Coze 教學</a>
+                    <a href="/workflow-examples.html" class="text-gray-600 hover:text-primary transition-colors">工作流範例</a>
+                    <a href="/faq.html" class="text-gray-600 hover:text-primary transition-colors">常見問題</a>
+                    <a href="/about.html" class="text-gray-600 hover:text-primary transition-colors">關於我們</a>
+                </nav>
+                <!-- 移动端菜单按钮 -->
+                <button id="menu-toggle" class="md:hidden text-gray-600 focus:outline-none">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+            <!-- 移动端菜单 -->
+            <div id="mobile-menu" class="hidden md:hidden py-3 space-y-3">
+                <a href="/" class="block py-2 text-gray-600 hover:text-primary">首頁</a>
+                <a href="/article.html" class="block py-2 text-primary">Coze 教學</a>
+                <a href="/workflow-examples.html" class="block py-2 text-gray-600 hover:text-primary">工作流範例</a>
+                <a href="/faq.html" class="block py-2 text-gray-600 hover:text-primary">常見問題</a>
+                <a href="/about.html" class="block py-2 text-gray-600 hover:text-primary">關於我們</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 文章标题区域 -->
+        <section class="bg-gradient-to-br from-blue-50 to-indigo-100 py-12 md:py-16">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <span class="inline-block bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm mb-4">商業應用</span>
+                    <h1 class="text-[clamp(1.6rem,3vw,2.5rem)] font-bold text-dark mb-4">餐廳如何用 Coze 打造 LINE 訂位機器人</h1>
+                    <div class="flex items-center text-gray-600 mb-6">
+                        <img src="https://picsum.photos/id/64/100/100" alt="作者頭像" class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <p class="font-medium">陳明軒 (餐飲科技顧問)</p>
+                            <p class="text-sm">2023年10月28日 · 閱讀時間：12分鐘</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 文章内容 -->
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <div class="article-content">
+                        <img src="https://picsum.photos/id/292/1200/600" alt="餐廳訂位機器人示意圖" class="w-full h-auto rounded-lg mb-6">
+                        
+                        <p>在台灣餐飲業人力成本日益高漲的環境下，自動化訂位系統已成為餐廳提升效率的重要工具。本文將教你如何利用 Coze 平台，不需編碼知識也能打造一個功能完整的 LINE 訂位機器人，幫助餐廳節省人力、減少失約率。</p>
+
+                        <div class="highlight-box">
+                            <p><strong>你將學到：</strong></p>
+                            <ul class="mb-0">
+                                <li>如何將 Coze 機器人與 LINE 連接</li>
+                                <li>設置訂位表單收集顧客資訊</li>
+                                <li>自動發送訂位確認與提醒訊息</li>
+                                <li>整合日曆管理訂位時段</li>
+                            </ul>
+                        </div>
+
+                        <h3>為什麼選擇 LINE 作為訂位管道？</h3>
+                        <p>根據統計，台灣 LINE 活躍用戶超過2100萬，幾乎涵蓋所有年齡層。對餐廳而言，使用 LINE 作為訂位管道有以下優勢：</p>
+                        <ul>
+                            <li>用戶不需要安裝額外APP，門檻低</li>
+                            <li>可直接發送提醒訊息，打開率高達90%以上</li>
+                            <li>可累積顧客名單，便於後續行銷</li>
+                            <li>與台灣人的溝通習慣相符</li>
+                        </ul>
+
+                        <h3>步驟1：準備工作</h3>
+                        <p>開始之前，請確保你已擁有以下帳號與資源：</p>
+                        <ol>
+                            <li>Coze 平台帳號（<a href="#" class="text-primary">免費註冊</a>）</li>
+                            <li>LINE 企業帳號（可在 <a href="https://business.line.me/" class="text-primary" target="_blank">LINE Business Center</a> 申請）</li>
+                            <li>餐廳營業時間與可訂位時段表</li>
+                        </ol>
+
+                        <h3>步驟2：建立 LINE 機器人並連接 Coze</h3>
+                        <p>1. 進入 LINE Developer Console，創建新的 Messaging API 頻道</p>
+                        <p>2. 在頻道設定中，找到「Channel Access Token」並複製</p>
+                        <p>3. 打開 Coze 平台，進入「整合」頁面，選擇 LINE 整合</p>
+                        <p>4. 粘貼剛才複製的 Access Token，完成連接設置</p>
+                        <img src="https://picsum.photos/id/48/1200/600" alt="Coze 與 LINE 連接設置" class="w-full h-auto rounded-lg mb-4">
+
+                        <h3>步驟3：設計訂位流程工作流</h3>
+                        <p>在 Coze Workflow 中，我們需要建立以下流程：</p>
+                        <ol>
+                            <li><strong>觸發條件</strong>：用戶發送「訂位」或點擊菜單按鈕</li>
+                            <li><strong>收集資訊</strong>：透過表單詢問用戶
+                                <ul>
+                                    <li>訂位日期與時間</li>
+                                    <li>人數</li>
+                                    <li>聯絡電話</li>
+                                    <li>特殊需求（如素食、過敏原等）</li>
+                                </ul>
+                            </li>
+                            <li><strong>可用性檢查</strong>：比對預訂時間是否有空位</li>
+                            <li><strong>確認訂位</strong>：發送確認訊息給用戶</li>
+                            <li><strong>記錄管理</strong>：將訂位資訊保存到 Google 試算表</li>
+                            <li><strong>提醒設置</strong>：預約前1天和1小時發送提醒</li>
+                        </ol>
+
+                        <h3>步驟4：設置自動提醒功能</h3>
+                        <p>減少顧客失約是餐廳訂位系統的重要功能。在 Coze 中設置雙重提醒：</p>
+                        <ul>
+                            <li><strong>預約前1天</strong>：發送「明日訂位提醒」，包含時間地點</li>
+                            <li><strong>預約前1小時</strong>：發送「即將到達提醒」，可附帶交通資訊</li>
+                        </ul>
+                        <p>設置方法：使用「延時執行」組件，設定相對時間觸發提醒動作。</p>
+
+                        <h3>步驟5：導入顧客使用與後續優化</h3>
+                        <p>完成設置後，可將 LINE 機器人 QR 碼張貼在餐廳門口、菜單或宣傳物料上。建議：</p>
+                        <ul>
+                            <li>初期安排員工監控訂位狀況，確保系統運作正常</li>
+                            <li>收集顧客反饋，優化訂位流程</li>
+                            <li>節假日可增加「等候清單」功能</li>
+                            <li>定期分析訂位數據，優化營業策略</li>
+                        </ul>
+
+                        <h3>實際案例：台北某義大利餐廳的應用效果</h3>
+                        <p>位於台北東區的一家義大利餐廳導入此系統後，取得了顯著成效：</p>
+                        <ul>
+                            <li>訂位處理時間減少75%，節省一名服務生的人力成本</li>
+                            <li>失約率從20%降至8%</li>
+                            <li>顧客滿意度提升30%</li>
+                            <li>透過機器人累積了3000+會員名單</li>
+                        </ul>
+                    </div>
+
+                    <!-- 文章底部操作区 -->
+                    <div class="mt-10 pt-6 border-t border-gray-200">
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#餐廳自動化</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#LINE機器人</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#訂位系統</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#Coze商業應用</span>
+                        </div>
+                        
+                        <div class="flex justify-between items-center">
+                            <a href="/workflow-examples.html" class="text-primary hover:underline flex items-center">
+                                <i class="fa fa-arrow-left mr-2"></i> 返回工作流範例
+                            </a>
+                            <div class="flex gap-4">
+                                <button class="text-gray-600 hover:text-primary transition-custom">
+                                    <i class="fa fa-bookmark"></i> 收藏
+                                </button>
+                                <button class="text-gray-600 hover:text-primary transition-custom">
+                                    <i class="fa fa-share-alt"></i> 分享
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 相关文章推荐 -->
+                    <div class="mt-12">
+                        <h3 class="text-xl font-bold mb-6 text-dark">推薦閱讀</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <a href="/articles/coze-workflow-conditions.html" class="block bg-gray-50 rounded-lg overflow-hidden card-hover">
+                                <img src="https://picsum.photos/id/0/600/400" alt="條件判斷工作流" class="w-full h-40 object-cover">
+                                <div class="p-4">
+                                    <h4 class="font-bold text-dark mb-2">Coze Workflow 高級技巧：條件判斷與循環</h4>
+                                    <p class="text-gray-600 text-sm">學習如何使用條件判斷與循環，打造更靈活的自動化流程...</p>
+                                </div>
+                            </a>
+                            <a href="/articles/coze-stock-monitor.html" class="block bg-gray-50 rounded-lg overflow-hidden card-hover">
+                                <img src="https://picsum.photos/id/180/600/400" alt="股票價格監控" class="w-full h-40 object-cover">
+                                <div class="p-4">
+                                    <h4 class="font-bold text-dark mb-2">股票價格監控：即時提醒工作流</h4>
+                                    <p class="text-gray-600 text-sm">設置股票價格監控，達到設定漲跌幅自動發送通知...</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-gray-300 py-12 mt-12">
+        <!-- 页脚内容与主页面一致 -->
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fa fa-robot text-primary text-3xl mr-3"></i>
+                        <span class="text-xl font-bold text-white">CozeTW</span>
+                    </div>
+                    <p class="mb-4">為台灣用戶提供 Coze 教學、範例與應用技巧，讓自動化更簡單。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-custom"><i class="fa fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-custom"><i class="fa fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-custom"><i class="fa fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-custom"><i class="fa fa-line"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">快速連結</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/" class="hover:text-primary transition-custom">首頁</a></li>
+                        <li><a href="/article.html" class="hover:text-primary transition-custom">Coze 教學</a></li>
+                        <li><a href="/workflow-examples.html" class="hover:text-primary transition-custom">工作流範例</a></li>
+                        <li><a href="/faq.html" class="hover:text-primary transition-custom">常見問題</a></li>
+                        <li><a href="/about.html" class="hover:text-primary transition-custom">關於我們</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">資源</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-primary transition-custom">Coze 官方網站</a></li>
+                        <li><a href="#" class="hover:text-primary transition-custom">開發者文檔</a></li>
+                        <li><a href="#" class="hover:text-primary transition-custom">模板下載</a></li>
+                        <li><a href="#" class="hover:text-primary transition-custom">API 參考</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">聯繫我們</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center"><i class="fa fa-envelope mr-2"></i> contact@cozetw.asia</li>
+                        <li class="flex items-center"><i class="fa fa-map-marker mr-2"></i> 台北市大安區</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm">
+                <p>&copy; 2023 CozeTW. 保留所有權利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3 分鐘學會 Coze Workflow：台灣天氣提醒案例 | cozetw.asia</title>
+    <meta name="description" content="3分鐘快速學會使用Coze Workflow建立台灣天氣提醒，每天自動發送台北等城市天氣預報到LINE或信箱。">
+    <meta name="keywords" content="Coze Workflow, 天氣提醒, 台灣天氣, Coze 教學, 自動化案例">
+    <meta property="og:title" content="3 分鐘學會 Coze Workflow：台灣天氣提醒案例">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://cozetw.asia/articles/3-minute-coze-workflow-weather.html">
+    <meta property="og:image" content="https://picsum.photos/id/175/1200/630">
+    <link rel="canonical" href="https://cozetw.asia/articles/3-minute-coze-workflow-weather.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        dark: '#1E293B'
+                    },
+                    fontFamily: { sans: ['Noto Sans TC', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        @layer utilities {
+            .transition-custom { transition: all 0.3s ease; }
+            .card-hover { @apply hover:shadow-lg hover:-translate-y-1 transition-custom; }
+            .category-badge { @apply inline-block px-3 py-1 text-sm rounded-full; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="/" class="flex items-center">
+                    <i class="fa fa-robot text-primary text-3xl mr-3"></i>
+                    <span class="text-xl font-bold text-primary">CozeTW</span>
+                </a>
+                <!-- 桌面端导航 -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="/" class="text-gray-600 hover:text-primary transition-colors">首頁</a>
+                    <a href="/article.html" class="text-primary font-medium">Coze 教學</a>
+                    <a href="/workflow-examples.html" class="text-gray-600 hover:text-primary transition-colors">工作流範例</a>
+                    <a href="/faq.html" class="text-gray-600 hover:text-primary transition-colors">常見問題</a>
+                    <a href="/about.html" class="text-gray-600 hover:text-primary transition-colors">關於我們</a>
+                </nav>
+                <!-- 移动端菜单按钮 -->
+                <button id="menu-toggle" class="md:hidden text-gray-600 focus:outline-none">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+            <!-- 移动端菜单 -->
+            <div id="mobile-menu" class="hidden md:hidden py-3 space-y-3">
+                <a href="/" class="block py-2 text-gray-600 hover:text-primary">首頁</a>
+                <a href="/article.html" class="block py-2 text-primary">Coze 教學</a>
+                <a href="/workflow-examples.html" class="block py-2 text-gray-600 hover:text-primary">工作流範例</a>
+                <a href="/faq.html" class="block py-2 text-gray-600 hover:text-primary">常見問題</a>
+                <a href="/about.html" class="block py-2 text-gray-600 hover:text-primary">關於我們</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 文章标题区域 -->
+        <section class="bg-gradient-to-br from-blue-50 to-indigo-100 py-12 md:py-16">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <span class="category-badge bg-blue-100 text-primary mb-4 inline-block">入門教學</span>
+                    <h1 class="text-[clamp(1.6rem,3vw,2.5rem)] font-bold text-dark mb-6">3 分鐘學會 Coze Workflow：台灣天氣提醒案例</h1>
+                    <div class="flex items-center text-gray-600 mb-8">
+                        <img src="https://picsum.photos/id/64/100/100" alt="作者頭像" class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <p class="font-medium">CozeTW 團隊</p>
+                            <p class="text-sm">2023年10月5日 · 閱讀時間：3分鐘</p>
+                        </div>
+                    </div>
+                    <img src="https://picsum.photos/id/175/1200/600" alt="台灣天氣提醒工作流" class="w-full h-auto rounded-xl shadow-md">
+                </div>
+            </div>
+        </section>
+
+        <!-- 文章内容区域 -->
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col lg:flex-row gap-10 max-w-6xl mx-auto">
+                    <!-- 主要内容 -->
+                    <div class="lg:w-2/3">
+                        <article class="prose lg:prose-lg max-w-none text-gray-700">
+                            <p class="text-lg leading-relaxed mb-6">
+                                想學會 Coze Workflow 但覺得很複雜？別擔心！本文將透過一個實用的台灣天氣提醒案例，在3分鐘內帶你快速掌握 Coze 工作流的基本操作。完成後，你將擁有一個每天自動查詢台灣天氣，並將結果發送到 LINE 或信箱的自動化工具。
+                            </p>
+
+                            <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-100 mb-8">
+                                <div class="flex items-start">
+                                    <i class="fa fa-lightbulb-o text-yellow-500 text-xl mt-1 mr-3"></i>
+                                    <p class="text-gray-700">
+                                        <strong>準備工作：</strong> 請先確保你已註冊 Coze 帳號，並安裝了「台灣氣象局天氣插件」和「LINE 通知插件」（如果想用 LINE 接收提醒）。
+                                    </p>
+                                </div>
+                            </div>
+
+                            <h2 class="text-2xl font-bold text-dark mt-8 mb-4">步驟 1：建立新工作流</h2>
+                            <ol class="list-decimal pl-6 mb-6 space-y-3">
+                                <li>登錄 Coze 平台，點擊左側導航欄的「Workflow」</li>
+                                <li>點擊右上角的「+ 建立工作流」按鈕</li>
+                                <li>輸入工作流名稱「台灣每日天氣提醒」，點擊「建立」</li>
+                            </ol>
+                            <img src="https://picsum.photos/id/180/800/400" alt="建立新工作流" class="w-full h-auto rounded-lg shadow-sm my-4">
+
+                            <h2 class="text-2xl font-bold text-dark mt-10 mb-4">步驟 2：設定觸發條件</h2>
+                            <p class="mb-4">我們希望每天固定時間收到天氣提醒，因此需要設定定時觸發：</p>
+                            <ol class="list-decimal pl-6 mb-6 space-y-3">
+                                <li>在工作流編輯頁面，點擊「添加觸發器」</li>
+                                <li>選擇「時間觸發器」（Time Trigger）</li>
+                                <li>設定時間：每天早上 7:00</li>
+                                <li>時區選擇：台北（UTC+8）</li>
+                                <li>點擊「確認」完成設定</li>
+                            </ol>
+
+                            <h2 class="text-2xl font-bold text-dark mt-10 mb-4">步驟 3：添加天氣查詢動作</h2>
+                            <ol class="list-decimal pl-6 mb-6 space-y-3">
+                                <li>點擊「+ 添加動作」按鈕</li>
+                                <li>選擇「台灣氣象局天氣插件」</li>
+                                <li>選擇動作「查詢天氣」</li>
+                                <li>設置參數：
+                                    <ul class="list-disc pl-6 mt-2">
+                                        <li>地點：輸入你所在的城市（例如「台北市」、「高雄市」）</li>
+                                        <li>查詢天數：1 天</li>
+                                        <li>需要的資訊：溫度、降雨機率、天氣狀況</li>
+                                    </ul>
+                                </li>
+                                <li>點擊「確認」添加這個動作</li>
+                            </ol>
+
+                            <h2 class="text-2xl font-bold text-dark mt-10 mb-4">步驟 4：設定通知方式</h2>
+                            <p class="mb-4">選擇你偏好的通知方式，將天氣資訊發送給自己：</p>
+                            
+                            <h3 class="text-xl font-semibold mt-6 mb-3">選項 A：透過 LINE 接收</h3>
+                            <ol class="list-decimal pl-6 mb-6 space-y-3">
+                                <li>再次點擊「+ 添加動作」</li>
+                                <li>選擇「LINE 通知插件」</li>
+                                <li>選擇動作「發送訊息」</li>
+                                <li>在訊息內容中輸入：
+                                    <div class="bg-gray-50 p-3 rounded text-sm my-2">
+                                        早安！今天 {{weather.location}} 的天氣是 {{weather.condition}}，溫度 {{weather.temperature}} 度，降雨機率 {{weather.rain_probability}}%。
+                                        {{#if weather.rain_probability > 30}}
+                                        記得帶傘哦！
+                                        {{/if}}
+                                    </div>
+                                </li>
+                                <li>點擊「確認」完成設定</li>
+                            </ol>
+                            
+                            <h3 class="text-xl font-semibold mt-6 mb-3">選項 B：透過 Email 接收</h3>
+                            <ol class="list-decimal pl-6 mb-6 space-y-3">
+                                <li>再次點擊「+ 添加動作」</li>
+                                <li>選擇「Email 插件」</li>
+                                <li>輸入你的信箱地址</li>
+                                <li>標題輸入：「今日天氣預報」</li>
+                                <li>內容設定與 LINE 訊息類似</li>
+                                <li>點擊「確認」完成設定</li>
+                            </ol>
+
+                            <h2 class="text-2xl font-bold text-dark mt-10 mb-4">步驟 5：測試與啟動工作流</h2>
+                            <ol class="list-decimal pl-6 mb-6 space-y-3">
+                                <li>點擊工作流編輯頁面右上角的「測試」按鈕</li>
+                                <li>檢查是否能收到正確的天氣通知</li>
+                                <li>如果測試成功，點擊「啟動」按鈕啟用工作流</li>
+                                <li>從明天開始，你將每天按設定的時間收到天氣提醒</li>
+                            </ol>
+
+                            <div class="bg-blue-50 p-6 rounded-xl border border-blue-100 mt-10">
+                                <h3 class="text-xl font-bold text-primary mb-3">進階技巧</h3>
+                                <p class="text-gray-700 mb-4">
+                                    學會了基礎版本後，你可以嘗試這些進階功能：
+                                </p>
+                                <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                                    <li>添加多個地點的天氣查詢</li>
+                                    <li>根據降雨機率設置不同的提醒內容（例如雨天推薦室內活動）</li>
+                                    <li>在假日改變提醒時間（例如周末改為上午 9 點）</li>
+                                    <li>添加紫外線指標提醒防曬</li>
+                                </ul>
+                                <div class="mt-4">
+                                    <a href="/articles/coze-workflow-conditions.html" class="text-primary hover:underline font-medium">
+                                        學習更多 Workflow 高級技巧 <i class="fa fa-arrow-right ml-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- 分享按钮 -->
+                        <div class="mt-10 flex flex-wrap items-center gap-4">
+                            <p class="text-gray-600">分享這篇文章：</p>
+                            <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-custom">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                            <a href="#" class="bg-sky-500 hover:bg-sky-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition-custom">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                            <a href="#" class="bg-green-500 hover:bg-green-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition-custom">
+                                <i class="fa fa-line"></i>
+                            </a>
+                            <a href="#" class="bg-gray-700 hover:bg-gray-800 text-white w-10 h-10 rounded-full flex items-center justify-center transition-custom">
+                                <i class="fa fa-copy"></i>
+                            </a>
+                        </div>
+
+                        <!-- 相关文章 -->
+                        <div class="mt-16">
+                            <h3 class="text-xl font-bold text-dark mb-6">相關教學</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <a href="/articles/coze-plugins-taiwan.html" class="flex gap-4 group">
+                                    <img src="https://picsum.photos/id/2/300/200" alt="Coze 插件推薦" class="w-32 h-24 object-cover rounded-lg flex-shrink-0">
+                                    <div>
+                                        <h4 class="font-medium text-dark group-hover:text-primary transition-custom">Coze 插件推薦：台灣常用工具整合</h4>
+                                        <p class="text-sm text-gray-500 mt-1">探索更多實用的台灣插件...</p>
+                                    </div>
+                                </a>
+                                <a href="/articles/coze-workflow-conditions.html" class="flex gap-4 group">
+                                    <img src="https://picsum.photos/id/0/300/200" alt="Coze Workflow 高級技巧" class="w-32 h-24 object-cover rounded-lg flex-shrink-0">
+                                    <div>
+                                        <h4 class="font-medium text-dark group-hover:text-primary transition-custom">Coze Workflow 高級技巧：條件判斷與循環</h4>
+                                        <p class="text-sm text-gray-500 mt-1">學習如何增強工作流功能...</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 侧边栏 -->
+                    <div class="lg:w-1/3">
+                        <!-- 作者信息 -->
+                        <div class="bg-gray-50 rounded-xl p-6 mb-8">
+                            <div class="flex items-center mb-4">
+                                <img src="https://picsum.photos/id/64/200/200" alt="作者頭像" class="w-16 h-16 rounded-full mr-4">
+                                <div>
+                                    <h3 class="font-bold text-dark">CozeTW 團隊</h3>
+                                    <p class="text-gray-600 text-sm">AI 應用研究員</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4">
+                                專注於 Coze 在台灣的應用與推廣，幫助用戶掌握 AI 工具，提升工作效率。
+                            </p>
+                            <a href="/about.html" class="text-primary hover:underline text-sm">查看更多關於我們</a>
+                        </div>
+
+                        <!-- 下载模板 -->
+                        <div class="bg-primary rounded-xl p-6 mb-8 text-white">
+                            <h3 class="font-bold text-lg mb-3">下載工作流模板</h3>
+                            <p class="text-white/80 text-sm mb-4">
+                                無需重新建立，直接下載本文的天氣提醒工作流模板
+                            </p>
+                            <button class="w-full bg-white text-primary hover:bg-gray-100 py-3 rounded-lg transition-custom flex items-center justify-center font-medium">
+                                <i class="fa fa-download mr-2"></i> 免費下載模板
+                            </button>
+                        </div>
+
+                        <!-- 热门文章 -->
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8">
+                            <h3 class="font-bold text-dark text-lg mb-4">熱門教學</h3>
+                            <div class="space-y-4">
+                                <a href="/articles/coze-news-summary.html" class="flex gap-3 group">
+                                    <span class="text-primary font-bold">01</span>
+                                    <p class="text-gray-700 group-hover:text-primary transition-custom">Coze 工作流：每日台灣新聞彙總</p>
+                                </a>
+                                <div class="w-full h-px bg-gray-100"></div>
+                                <a href="/articles/coze-restaurant-reservation.html" class="flex gap-3 group">
+                                    <span class="text-primary font-bold">02</span>
+                                    <p class="text-gray-700 group-hover:text-primary transition-custom">餐廳如何用 Coze 打造 LINE 訂位機器人</p>
+                                </a>
+                                <div class="w-full h-px bg-gray-100"></div>
+                                <a href="/articles/coze-homework-reminder.html" class="flex gap-3 group">
+                                    <span class="text-primary font-bold">03</span>
+                                    <p class="text-gray-700 group-hover:text-primary transition-custom">國小老師的 Coze 應用：作業提醒機器人</p>
+                                </a>
+                                <div class="w-full h-px bg-gray-100"></div>
+                                <a href="/articles/coze-prompt-tips.html" class="flex gap-3 group">
+                                    <span class="text-primary font-bold">04</span>
+                                    <p class="text-gray-700 group-hover:text-primary transition-custom">台灣用戶必學的 Coze 提示詞技巧</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-gray-300 py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fa fa-robot text-primary text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-white">CozeTW</span>
+                    </div>
+                    <p class="mb-4">台灣最完整的 Coze 教學資源，幫助您輕鬆掌握 AI 助理製作與自動化技巧。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fa fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fa fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fa fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fa fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">快速連結</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/" class="hover:text-primary transition-colors">首頁</a></li>
+                        <li><a href="/article.html" class="hover:text-primary transition-colors">Coze 教學</a></li>
+                        <li><a href="/workflow-examples.html" class="hover:text-primary transition-colors">工作流範例</a></li>
+                        <li><a href="/faq.html" class="hover:text-primary transition-colors">常見問題</a></li>
+                        <li><a href="/sitemap.html" class="hover:text-primary transition-colors">網站地圖</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">法律資訊</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/privacy.html" class="hover:text-primary transition-colors">隱私政策</a></li>
+                        <li><a href="/terms.html" class="hover:text-primary transition-colors">使用條款</a></li>
+                        <li><a href="/disclaimer.html" class="hover:text-primary transition-colors">免責聲明</a></li>
+                        <li><a href="/copyright.html" class="hover:text-primary transition-colors">著作權聲明</a></li>
+                        <li><a href="/contact.html" class="hover:text-primary transition-colors">聯絡我們</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">訂閱最新教學</h4>
+                    <p class="mb-4">第一時間獲取 Coze 最新功能教學與台灣專屬資源</p>
+                    <form class="flex">
+                        <input type="email" placeholder="您的 Email" class="px-4 py-2 rounded-l-lg w-full focus:outline-none text-gray-800">
+                        <button type="submit" class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-r-lg transition-custom">
+                            <i class="fa fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p>&copy; 2023 cozetw.asia. 保留所有權利。</p>
+                <div class="mt-4 md:mt-0">
+                    <a href="/privacy.html" class="hover:text-primary mr-4 transition-colors">隱私政策</a>
+                    <a href="/terms.html" class="hover:text-primary transition-colors">使用條款</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // 页面滚动时导航栏效果
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-lg');
+                header.classList.remove('shadow-md');
+            } else {
+                header.classList.remove('shadow-lg');
+                header.classList.add('shadow-md');
+            }
+        });
+    </script>
+</body>
+</html>

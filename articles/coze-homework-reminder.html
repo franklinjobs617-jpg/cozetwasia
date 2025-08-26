@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>國小老師的 Coze 應用：作業提醒機器人 | cozetw.asia</title>
+    <meta name="description" content="國小老師如何利用 Coze 打造作業提醒機器人，自動發送作業通知給家長，減輕行政負擔，提高學生完成率。">
+    <meta name="keywords" content="Coze 教育應用, 作業提醒機器人, 國小老師工具, Coze 家長通知, 教育自動化">
+    <meta property="og:title" content="國小老師的 Coze 應用：作業提醒機器人">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://cozetw.asia/articles/coze-homework-reminder.html">
+    <meta property="og:image" content="https://picsum.photos/id/20/1200/630">
+    <link rel="canonical" href="https://cozetw.asia/articles/coze-homework-reminder.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        dark: '#1E293B'
+                    },
+                    fontFamily: { sans: ['Noto Sans TC', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        @layer utilities {
+            .transition-custom { transition: all 0.3s ease; }
+            .card-hover { @apply hover:shadow-lg hover:-translate-y-1 transition-custom; }
+            .article-content h3 { @apply text-xl font-bold mb-3 mt-6 text-dark; }
+            .article-content p { @apply mb-4 text-gray-700 leading-relaxed; }
+            .article-content ul { @apply mb-4 pl-6 list-disc text-gray-700; }
+            .article-content ol { @apply mb-4 pl-6 list-decimal text-gray-700; }
+            .tip-box { @apply bg-green-50 border-l-4 border-green-400 p-4 mb-6; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="/" class="flex items-center">
+                    <i class="fa fa-robot text-primary text-3xl mr-3"></i>
+                    <span class="text-xl font-bold text-primary">CozeTW</span>
+                </a>
+                <!-- 桌面端导航 -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="/" class="text-gray-600 hover:text-primary transition-colors">首頁</a>
+                    <a href="/article.html" class="text-primary font-medium">Coze 教學</a>
+                    <a href="/workflow-examples.html" class="text-gray-600 hover:text-primary transition-colors">工作流範例</a>
+                    <a href="/faq.html" class="text-gray-600 hover:text-primary transition-colors">常見問題</a>
+                    <a href="/about.html" class="text-gray-600 hover:text-primary transition-colors">關於我們</a>
+                </nav>
+                <!-- 移动端菜单按钮 -->
+                <button id="menu-toggle" class="md:hidden text-gray-600 focus:outline-none">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+            <!-- 移动端菜单 -->
+            <div id="mobile-menu" class="hidden md:hidden py-3 space-y-3">
+                <a href="/" class="block py-2 text-gray-600 hover:text-primary">首頁</a>
+                <a href="/article.html" class="block py-2 text-primary">Coze 教學</a>
+                <a href="/workflow-examples.html" class="block py-2 text-gray-600 hover:text-primary">工作流範例</a>
+                <a href="/faq.html" class="block py-2 text-gray-600 hover:text-primary">常見問題</a>
+                <a href="/about.html" class="block py-2 text-gray-600 hover:text-primary">關於我們</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 文章标题区域 -->
+        <section class="bg-gradient-to-br from-blue-50 to-indigo-100 py-12 md:py-16">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <span class="inline-block bg-yellow-100 text-yellow-600 px-3 py-1 rounded-full text-sm mb-4">教育應用</span>
+                    <h1 class="text-[clamp(1.6rem,3vw,2.5rem)] font-bold text-dark mb-4">國小老師的 Coze 應用：作業提醒機器人</h1>
+                    <div class="flex items-center text-gray-600 mb-6">
+                        <img src="https://picsum.photos/id/64/100/100" alt="作者頭像" class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <p class="font-medium">李美華老師 (台北市某國小)</p>
+                            <p class="text-sm">2023年9月5日 · 閱讀時間：11分鐘</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 文章内容 -->
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <div class="article-content">
+                        <img src="https://picsum.photos/id/20/1200/600" alt="作業提醒機器人示意圖" class="w-full h-auto rounded-lg mb-6">
+                        
+                        <p>身為國小老師，除了教學之外，最耗費時間的莫過於處理各種行政事務，其中又以「提醒學生與家長有關作業與繳交期限」最為重複繁瑣。本文將分享我如何使用 Coze 打造一個簡單的作業提醒機器人，幫助我自動發送通知，不僅節省時間，也提高了學生的作業完成率。</p>
+
+                        <div class="tip-box">
+                            <p><strong>實際效益：</strong>導入這個系統後，我的班級作業逾期率從35%降至8%，每周節省約3小時的提醒時間，家長滿意度也明顯提升。</p>
+                        </div>
+
+                        <h3>為什麼需要作業提醒機器人？</h3>
+                        <p>在實際教學中，我發現以下常見問題：</p>
+                        <ul>
+                            <li>學生經常忘記作業內容或繳交期限</li>
+                            <li>家長忙碌時容易錯過班級群組中的作業通知</li>
+                            <li>老師需重複回覆家長詢問作業的訊息</li>
+                            <li>臨時更改作業內容時，難以確保所有家長都看到更新</li>
+                        </ul>
+                        <p>這些問題不僅浪費老師的時間，也影響學習效果。透過自動化提醒，可以有效解決這些問題。</p>
+
+                        <h3>系統架構與所需工具</h3>
+                        <p>這個作業提醒機器人主要由以下部分組成：</p>
+                        <ol>
+                            <li><strong>輸入端</strong>：Google 表單（老師輸入作業內容與截止日期）</li>
+                            <li><strong>處理中心</strong>：Coze Workflow（設置提醒規則與時間）</li>
+                            <li><strong>輸出端</strong>：LINE 群組/個別通知（發送提醒給家長）</li>
+                            <li><strong>儲存空間</strong>：Google 試算表（記錄所有作業與繳交狀況）</li>
+                        </ol>
+                        <p>不需要任何程式設計知識，只要按照步驟設置即可完成。</p>
+
+                        <h3>步驟1：建立作業輸入表單</h3>
+                        <p>首先，建立一個 Google 表單讓老師輸入作業資訊，包含以下欄位：</p>
+                        <ul>
+                            <li>作業名稱（例如：數學練習簿第10頁）</li>
+                            <li>作業內容與說明</li>
+                            <li>截止日期與時間</li>
+                            <li>適用年級/班級</li>
+                            <li>是否需要家長簽名</li>
+                        </ul>
+                        <p>表單提交後，數據會自動儲存到 Google 試算表中，方便後續管理。</p>
+
+                        <h3>步驟2：設置 Coze 工作流</h3>
+                        <p>在 Coze 平台中建立以下工作流程：</p>
+                        <img src="https://picsum.photos/id/42/1200/600" alt="作業提醒工作流設置" class="w-full h-auto rounded-lg mb-4">
+                        
+                        <ol>
+                            <li><strong>觸發條件</strong>：當 Google 表單有新回應時</li>
+                            <li><strong>數據處理</strong>：提取作業資訊，計算提醒時間點
+                                <ul>
+                                    <li>首次提醒：作業發布後立即發送</li>
+                                    <li>第二次提醒：截止前3天</li>
+                                    <li>最後提醒：截止前1天</li>
+                                </ul>
+                            </li>
+                            <li><strong>通知發送</strong>：根據班級信息，選擇對應的 LINE 群組或家長聯繫人</li>
+                            <li><strong>狀態更新</strong>：在試算表中記錄提醒發送狀況</li>
+                        </ol>
+
+                        <h3>步驟3：LINE 通知內容設計</h3>
+                        <p>通知內容需要清晰易懂，包含所有必要信息。以下是我使用的範本：</p>
+                        <ul>
+                            <li><strong>首次通知範本：</strong>
+                                <br>【新作業通知】
+                                <br>作業：數學練習簿第10頁
+                                <br>內容：完成練習後請家長檢查
+                                <br>截止：10月15日（六）晚上8點前
+                                <br>備註：需要家長簽名
+                            </li>
+                            <li><strong>最後提醒範本：</strong>
+                                <br>【作業最後提醒】
+                                <br>明天（10月15日）是「數學練習簿第10頁」的繳交截止日，請記得完成並帶來學校。
+                            </li>
+                        </ul>
+
+                        <h3>步驟4：家長使用與回饋收集</h3>
+                        <p>導入系統後，建議：</p>
+                        <ul>
+                            <li>舉行簡短說明會，向家長說明系統功能與使用方式</li>
+                            <li>設置意見回饋表單，收集改進建議</li>
+                            <li>每學期調整一次提醒頻率與內容，找到最適合的方式</li>
+                        </ul>
+
+                        <h3>進階應用：個別化提醒</h3>
+                        <p>如果班級學生有特殊需求，可以增加以下功能：</p>
+                        <ul>
+                            <li>針對經常忘記作業的學生，增加額外提醒</li>
+                            <li>為不同學習進度的學生發送適合的作業內容</li>
+                            <li>整合「已完成」回報功能，老師可即時掌握完成狀況</li>
+                        </ul>
+                    </div>
+
+                    <!-- 文章底部操作区 -->
+                    <div class="mt-10 pt-6 border-t border-gray-200">
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#教育科技</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#國小教育</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#作業提醒</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#Coze教育應用</span>
+                        </div>
+                        
+                        <div class="flex justify-between items-center">
+                            <a href="/workflow-examples.html" class="text-primary hover:underline flex items-center">
+                                <i class="fa fa-arrow-left mr-2"></i> 返回工作流範例
+                            </a>
+                            <div class="flex gap-4">
+                                <button class="text-gray-600 hover:text-primary transition-custom">
+                                    <i class="fa fa-bookmark"></i> 收藏
+                                </button>
+                                <button class="text-gray-600 hover:text-primary transition-custom">
+                                    <i class="fa fa-share-alt"></i> 分享
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 相关文章推荐 -->
+                    <div class="mt-12">
+                        <h3 class="text-xl font-bold mb-6 text-dark">推薦閱讀</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <a href="/articles/coze-workflow-conditions.html" class="block bg-gray-50 rounded-lg overflow-hidden card-hover">
+                                <img src="https://picsum.photos/id/0/600/400" alt="條件判斷工作流" class="w-full h-40 object-cover">
+                                <div class="p-4">
+                                    <h4 class="font-bold text-dark mb-2">Coze Workflow 高級技巧：條件判斷與循環</h4>
+                                    <p class="text-gray-600 text-sm">學習如何使用條件判斷與循環，打造更靈活的自動化流程...</p>
+                                </div>
+                            </a>
+                            <a href="/articles/coze-restaurant-reservation.html" class="block bg-gray-50 rounded-lg overflow-hidden card-hover">
+                                <img src="https://picsum.photos/id/292/600/400" alt="餐廳訂位機器人" class="w-full h-40 object-cover">
+                                <div class="p-4">
+                                    <h4 class="font-bold text-dark mb-2">餐廳如何用 Coze 打造 LINE 訂位機器人</h4>
+                                    <p class="text-gray-600 text-sm">學習如何為餐廳建立自動化訂位系統，節省人力成本...</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-gray-300 py-12 mt-12">
+        <!-- 页脚内容与主页面一致 -->
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fa fa-robot text-primary text-3xl mr-3"></i>
+                        <span class="text-xl font-bold text-white">CozeTW</span>
+                    </div>
+                    <p class="mb-4">為台灣用戶提供 Coze 教學、範例與應用技巧，讓自動化更簡單。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-custom"><i class="fa fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-custom"><i class="fa fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-custom"><i class="fa fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-custom"><i class="fa fa-line"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">快速連結</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/" class="hover:text-primary transition-custom">首頁</a></li>
+                        <li><a href="/article.html" class="hover:text-primary transition-custom">Coze 教學</a></li>
+                        <li><a href="/workflow-examples.html" class="hover:text-primary transition-custom">工作流範例</a></li>
+                        <li><a href="/faq.html" class="hover:text-primary transition-custom">常見問題</a></li>
+                        <li><a href="/about.html" class="hover:text-primary transition-custom">關於我們</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">資源</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-primary transition-custom">Coze 官方網站</a></li>
+                        <li><a href="#" class="hover:text-primary transition-custom">開發者文檔</a></li>
+                        <li><a href="#" class="hover:text-primary transition-custom">模板下載</a></li>
+                        <li><a href="#" class="hover:text-primary transition-custom">API 參考</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">聯繫我們</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center"><i class="fa fa-envelope mr-2"></i> contact@cozetw.asia</li>
+                        <li class="flex items-center"><i class="fa fa-map-marker mr-2"></i> 台北市大安區</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm">
+                <p>&copy; 2023 CozeTW. 保留所有權利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coze Workflow 高級技巧：條件判斷與循環 | cozetw.asia</title>
+    <meta name="description" content="學習 Coze Workflow 中的條件判斷與循環技巧，打造更靈活的自動化流程，適合台灣用戶的進階應用。">
+    <meta name="keywords" content="Coze 高級技巧, Coze 條件判斷, Coze 循環, Workflow 進階, Coze 教學">
+    <meta property="og:title" content="Coze Workflow 高級技巧：條件判斷與循環">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://cozetw.asia/articles/coze-workflow-conditions.html">
+    <meta property="og:image" content="https://picsum.photos/id/0/1200/630">
+    <link rel="canonical" href="https://cozetw.asia/articles/coze-workflow-conditions.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        dark: '#1E293B'
+                    },
+                    fontFamily: { sans: ['Noto Sans TC', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        @layer utilities {
+            .transition-custom { transition: all 0.3s ease; }
+            .card-hover { @apply hover:shadow-lg hover:-translate-y-1 transition-custom; }
+            .article-content h3 { @apply text-xl font-bold mb-3 mt-6 text-dark; }
+            .article-content p { @apply mb-4 text-gray-700 leading-relaxed; }
+            .article-content ul { @apply mb-4 pl-6 list-disc text-gray-700; }
+            .code-block { @apply bg-gray-900 text-gray-100 p-4 rounded-lg mb-6 overflow-x-auto; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="/" class="flex items-center">
+                    <i class="fa fa-robot text-primary text-3xl mr-3"></i>
+                    <span class="text-xl font-bold text-primary">CozeTW</span>
+                </a>
+                <!-- 桌面端导航 -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="/" class="text-gray-600 hover:text-primary transition-colors">首頁</a>
+                    <a href="/article.html" class="text-primary font-medium">Coze 教學</a>
+                    <a href="/workflow-examples.html" class="text-gray-600 hover:text-primary transition-colors">工作流範例</a>
+                    <a href="/faq.html" class="text-gray-600 hover:text-primary transition-colors">常見問題</a>
+                    <a href="/about.html" class="text-gray-600 hover:text-primary transition-colors">關於我們</a>
+                </nav>
+                <!-- 移动端菜单按钮 -->
+                <button id="menu-toggle" class="md:hidden text-gray-600 focus:outline-none">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+            <!-- 移动端菜单 -->
+            <div id="mobile-menu" class="hidden md:hidden py-3 space-y-3">
+                <a href="/" class="block py-2 text-gray-600 hover:text-primary">首頁</a>
+                <a href="/article.html" class="block py-2 text-primary">Coze 教學</a>
+                <a href="/workflow-examples.html" class="block py-2 text-gray-600 hover:text-primary">工作流範例</a>
+                <a href="/faq.html" class="block py-2 text-gray-600 hover:text-primary">常見問題</a>
+                <a href="/about.html" class="block py-2 text-gray-600 hover:text-primary">關於我們</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 文章标题区域 -->
+        <section class="bg-gradient-to-br from-blue-50 to-indigo-100 py-12 md:py-16">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <span class="inline-block bg-blue-100 text-primary px-3 py-1 rounded-full text-sm mb-4">高級技巧</span>
+                    <h1 class="text-[clamp(1.6rem,3vw,2.5rem)] font-bold text-dark mb-4">Coze Workflow 高級技巧：條件判斷與循環</h1>
+                    <div class="flex items-center text-gray-600 mb-6">
+                        <img src="https://picsum.photos/id/64/100/100" alt="作者頭像" class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <p class="font-medium">CozeTW 團隊</p>
+                            <p class="text-sm">2023年11月15日 · 閱讀時間：10分鐘</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 文章内容 -->
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <div class="article-content">
+                        <p>當你已經熟悉 Coze Workflow 的基本操作後，條件判斷與循環功能可以幫助你建立更靈活、更智能的自動化流程。本文將詳細介紹如何在 Coze 中使用這些高級功能，並提供適合台灣用戶的實際應用案例。</p>
+
+                        <h3>什麼是條件判斷？</h3>
+                        <p>條件判斷（If-Else）是程式設計中的基本概念，在 Coze Workflow 中，它允許你根據不同的情況執行不同的動作。例如：</p>
+                        <ul>
+                            <li>如果明天下雨，則提醒帶雨傘</li>
+                            <li>如果股價漲幅超過5%，則發送通知</li>
+                            <li>如果訂單金額超過1000元，則自動使用折價券</li>
+                        </ul>
+
+                        <h3>如何在 Coze 中設置條件判斷</h3>
+                        <p>步驟1：在工作流編輯器中，點擊「+」按鈕，選擇「條件判斷」組件</p>
+                        <img src="https://picsum.photos/id/0/1200/600" alt="Coze 條件判斷設置" class="w-full h-auto rounded-lg mb-4">
+                        
+                        <p>步驟2：設置判斷條件，例如「天氣狀況 == 雨天」</p>
+                        <div class="code-block">
+                            <pre>判斷條件：天氣狀況 == "雨天"
+- 符合條件：發送「帶雨傘」提醒
+- 不符合條件：發送「適合戶外活動」提醒</pre>
+                        </div>
+                        
+                        <p>步驟3：設置符合條件和不符合條件時分別執行的動作</p>
+                        <p>步驟4：點擊「測試」按鈕驗證條件判斷是否正常運作</p>
+
+                        <h3>循環功能的應用場景</h3>
+                        <p>循環功能允許你重複執行一組動作，直到滿足特定條件為止。在台灣常用的場景包括：</p>
+                        <ul>
+                            <li>批量發送通知給多個聯絡人</li>
+                            <li>檢查多支股票的價格變動</li>
+                            <li>處理表單中的多筆回應數據</li>
+                        </ul>
+
+                        <h3>實際案例：台灣天氣狀況動態提醒</h3>
+                        <p>以下是一個結合條件判斷與循環的實用案例，根據台北、台中、高雄三地的天氣狀況發送不同提醒：</p>
+                        <img src="https://picsum.photos/id/175/1200/600" alt="天氣提醒工作流範例" class="w-full h-auto rounded-lg mb-4">
+                        
+                        <ol>
+                            <li>使用循環遍歷台灣三個主要城市</li>
+                            <li>查詢每個城市的即時天氣</li>
+                            <li>使用條件判斷：
+                                <ul>
+                                    <li>如果降雨機率 > 70%：發送「大雨警告」</li>
+                                    <li>如果溫度 > 35°C：發送「高溫提醒」</li>
+                                    <li>否則：發送「適合外出」</li>
+                                </ul>
+                            </li>
+                        </ol>
+
+                        <h3>常見問題與解決方案</h3>
+                        <p><strong>Q：條件判斷總是執行「否」分支，怎麼辦？</strong><br>
+                        A：檢查變量名稱是否正確，以及比較符號是否使用正確（例如數值比較使用>、<，文字比較使用==）。</p>
+                        
+                        <p><strong>Q：循環運行後導致工作流卡住？</strong><br>
+                        A：請確保設置了合理的循環終止條件，避免無限循環。Coze 默認循環次數上限為100次。</p>
+                    </div>
+
+                    <!-- 文章底部操作区 -->
+                    <div class="mt-10 pt-6 border-t border-gray-200">
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#Coze 高級技巧</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#條件判斷</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#循環</span>
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#Workflow</span>
+                        </div>
+                        
+                        <div class="flex justify-between items-center">
+                            <a href="/workflow-examples.html" class="text-primary hover:underline flex items-center">
+                                <i class="fa fa-arrow-left mr-2"></i> 返回工作流範例
+                            </a>
+                            <div class="flex gap-4">
+                                <button class="text-gray-600 hover:text-primary transition-custom">
+                                    <i class="fa fa-bookmark"></i> 收藏
+                                </button>
+                                <button class="text-gray-600 hover:text-primary transition-custom">
+                                    <i class="fa fa-share-alt"></i> 分享
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 相关文章推荐 -->
+                    <div class="mt-12">
+                        <h3 class="text-xl font-bold mb-6 text-dark">推薦閱讀</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <a href="/articles/coze-restaurant-reservation.html" class="block bg-gray-50 rounded-lg overflow-hidden card-hover">
+                                <img src="https://picsum.photos/id/292/600/400" alt="餐廳LINE訂位機器人" class="w-full h-40 object-cover">
+                                <div class="p-4">
+                                    <h4 class="font-bold text-dark mb-2">餐廳如何用 Coze 打造 LINE 訂位機器人</h4>
+                                    <p class="text-gray-600 text-sm">學習如何為餐廳建立自動化訂位系統，節省人力成本...</p>
+                                </div>
+                            </a>
+                            <a href="/articles/coze-homework-reminder.html" class="block bg-gray-50 rounded-lg overflow-hidden card-hover">
+                                <img src="https://picsum.photos/id/20/600/400" alt="作業提醒機器人" class="w-full h-40 object-cover">
+                                <div class="p-4">
+                                    <h4 class="font-bold text-dark mb-2">國小老師的 Coze 應用：作業提醒機器人</h4>
+                                    <p class="text-gray-600 text-sm">幫助老師自動發送作業提醒，減輕行政負擔...</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-gray-300 py-12 mt-12">
+        <!-- 页脚内容与主页面一致 -->
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fa fa-robot text-primary text-3xl mr-3"></i>
+                        <span class="text-xl font-bold text-white">CozeTW</span>
+                    </div>
+                    <p class="mb-4">為台灣用戶提供 Coze 教學、範例與應用技巧，讓自動化更簡單。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-custom"><i class="fa fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-custom"><i class="fa fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-custom"><i class="fa fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-custom"><i class="fa fa-line"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">快速連結</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/" class="hover:text-primary transition-custom">首頁</a></li>
+                        <li><a href="/article.html" class="hover:text-primary transition-custom">Coze 教學</a></li>
+                        <li><a href="/workflow-examples.html" class="hover:text-primary transition-custom">工作流範例</a></li>
+                        <li><a href="/faq.html" class="hover:text-primary transition-custom">常見問題</a></li>
+                        <li><a href="/about.html" class="hover:text-primary transition-custom">關於我們</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">資源</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-primary transition-custom">Coze 官方網站</a></li>
+                        <li><a href="#" class="hover:text-primary transition-custom">開發者文檔</a></li>
+                        <li><a href="#" class="hover:text-primary transition-custom">模板下載</a></li>
+                        <li><a href="#" class="hover:text-primary transition-custom">API 參考</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">聯繫我們</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center"><i class="fa fa-envelope mr-2"></i> contact@cozetw.asia</li>
+                        <li class="flex items-center"><i class="fa fa-map-marker mr-2"></i> 台北市大安區</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm">
+                <p>&copy; 2023 CozeTW. 保留所有權利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

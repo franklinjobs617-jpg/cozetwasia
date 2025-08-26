@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coze 工作流：每日台灣新聞彙總 | cozetw.asia</title>
+    <meta name="description" content="使用Coze工作流自動收集每日台灣新聞，按類別整理後發送到信箱或LINE，節省閱讀時間，掌握重要資訊。">
+    <meta name="keywords" content="Coze 新聞彙總, 台灣新聞, 自動化新聞, Coze 工作流, 新聞機器人">
+    <meta property="og:title" content="Coze 工作流：每日台灣新聞彙總">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://cozetw.asia/articles/coze-news-summary.html">
+    <meta property="og:image" content="https://picsum.photos/id/180/1200/630">
+    <link rel="canonical" href="https://cozetw.asia/articles/coze-news-summary.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        dark: '#1E293B'
+                    },
+                    fontFamily: { sans: ['Noto Sans TC', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        @layer utilities {
+            .transition-custom { transition: all 0.3s ease; }
+            .card-hover { @apply hover:shadow-lg hover:-translate-y-1 transition-custom; }
+            .category-badge { @apply inline-block px-3 py-1 text-sm rounded-full; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="/" class="flex items-center">
+                    <i class="fa fa-robot text-primary text-3xl mr-3"></i>
+                    <span class="text-xl font-bold text-primary">CozeTW</span>
+                </a>
+                <!-- 桌面端导航 -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="/" class="text-gray-600 hover:text-primary transition-colors">首頁</a>
+                    <a href="/article.html" class="text-primary font-medium">Coze 教學</a>
+                    <a href="/workflow-examples.html" class="text-gray-600 hover:text-primary transition-colors">工作流範例</a>
+                    <a href="/faq.html" class="text-gray-600 hover:text-primary transition-colors">常見問題</a>
+                    <a href="/about.html" class="text-gray-600 hover:text-primary transition-colors">關於我們</a>
+                </nav>
+                <!-- 移动端菜单按钮 -->
+                <button id="menu-toggle" class="md:hidden text-gray-600 focus:outline-none">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+            <!-- 移动端菜单 -->
+            <div id="mobile-menu" class="hidden md:hidden py-3 space-y-3">
+                <a href="/" class="block py-2 text-gray-600 hover:text-primary">首頁</a>
+                <a href="/article.html" class="block py-2 text-primary">Coze 教學</a>
+                <a href="/workflow-examples.html" class="block py-2 text-gray-600 hover:text-primary">工作流範例</a>
+                <a href="/faq.html" class="block py-2 text-gray-600 hover:text-primary">常見問題</a>
+                <a href="/about.html" class="block py-2 text-gray-600 hover:text-primary">關於我們</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 文章标题区域 -->
+        <section class="bg-gradient-to-br from-blue-50 to-indigo-100 py-12 md:py-16">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <span class="category-badge bg-green-100 text-secondary mb-4 inline-block">資訊彙集</span>
+                    <h1 class="text-[clamp(1.6rem,3vw,2.5rem)] font-bold text-dark mb-6">Coze 工作流：每日台灣新聞彙總</h1>
+                    <div class="flex items-center text-gray-600 mb-8">
+                        <img src="https://picsum.photos/id/64/100/100" alt="作者頭像" class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <p class="font-medium">CozeTW 團隊</p>
+                            <p class="text-sm">2023年9月28日 · 閱讀時間：6分鐘</p>
+                        </div>
+                    </div>
+                    <img src="https://picsum.photos/id/180/1200/600" alt="每日台灣新聞彙總" class="w-full h-auto rounded-xl shadow-md">
+                </div>
+            </div>
+        </section>
+
+        <!-- 文章内容区域 -->
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col lg:flex-row gap-10 max-w-6xl mx-auto">
+                    <!-- 主要内容 -->
+                    <div class="lg:w-2/3">
+                        <article class="prose lg:prose-lg max-w-none text-gray-700">
+                            <p class="text-lg leading-relaxed mb-6">
+                                在資訊爆炸的時代，每天花時間瀏覽多個新聞網站收集重要資訊變得越來越困難。透過 Coze 工作流，你可以建立一個自動化的台灣新聞彙總系統，每天按指定時間收集各大媒體的頭條新聞，按類別整理後發送到你的信箱或 LINE，讓你輕鬆掌握每日要聞。
+                            </p>
+
+                            <h2 class="text-2xl font-bold text-dark mt-8 mb-4">什麼是新聞彙總工作流？</h2>
+                            <p class="mb-4">
+                                這個 Coze 工作流會自動執行以下任務：
+                            </p>
+                            <ul class="list-disc pl-6 mb-6 space-y-2">
+                                <li>每天固定時間（例如晚上 8 點）啟動</li>
+                                <li>從台灣主要新聞媒體收集當天頭條</li>
+                                <li>按照類別（政治、經濟、社會、體育等）分類整理</li>
+                                <li>生成簡潔的新聞摘要，每則新聞包含標題、來源和簡短描述</li>
+                                <li>將整理好的新聞彙總發送到你的 Email 或 LINE</li>
+                            </ul>
+
+                            <h2 class="text-2xl font-bold text-dark mt-10 mb-4">所需插件</h2>
+                            <p class="mb-4">在開始建立工作流之前，請先安裝以下插件：</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 flex items-center">
+                                    <i class="fa fa-newspaper text-primary text-xl mr-3"></i>
+                                    <div>
+                                        <p class="font-medium">台灣新聞彙集插件</p>
+                                        <p class="text-sm text-gray-600">收集台灣各大媒體新聞</p>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 flex items-center">
+                                    <i class="fa fa-envelope text-primary text-xl mr-3"></i>
+                                    <div>
+                                        <p class="font-medium">Email 插件</p>
+                                        <p class="text-sm text-gray-600">發送郵件通知</p>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 flex items-center">
+                                    <i class="fa fa-line text-primary text-xl mr-3"></i>
+                                    <div>
+                                        <p class="font-medium">LINE 通知插件</p>
+                                        <p class="text-sm text-gray-600">發送 LINE 訊息（可選）</p>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 flex items-center">
+                                    <i class="fa fa-clock text-primary text-xl mr-3"></i>
+                                    <div>
+                                        <p class="font-medium">時間觸發器</p>
+                                        <p class="text-sm text-gray-600">設定自動執行時間</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2 class="text-2xl font-bold text-dark mt-10 mb-4">建立步驟</h2>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-3">步驟 1：建立新工作流</h3>
+                            <ol class="list-decimal pl-6 mb-6 space-y-2">
+                                <li>進入 Coze 平台，點擊「建立工作流」</li>
+                                <li>命名為「每日台灣新聞彙總」</li>
+                                <li>點擊「確認」進入編輯畫面</li>
+                            </ol>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-3">步驟 2：設定時間觸發器</h3>
+                            <ol class="list-decimal pl-6 mb-6 space-y-2">
+                                <li>點擊「添加觸發器」，選擇「時間觸發器」</li>
+                                <li>設定執行時間：每天 20:00（晚上 8 點）</li>
+                                <li>時區選擇：台北（UTC+8）</li>
+                                <li>點擊「確認」完成設定</li>
+                            </ol>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-3">步驟 3：添加新聞收集動作</h3>
+                            <ol class="list-decimal pl-6 mb-6 space-y-2">
+                                <li>點擊「+ 添加動作」，選擇「台灣新聞彙集插件」</li>
+                                <li>選擇動作「收集頭條新聞」</li>
+                                <li>設置參數：
+                                    <ul class="list-disc pl-6 mt-2">
+                                        <li>新聞類別：可多選（政治、經濟、社會、國際、體育、娛樂）</li>
+                                        <li>媒體來源：可選擇特定媒體或全部</li>
+                                        <li>數量：每類別 3-5 則</li>
+                                    </ul>
+                                </li>
+                                <li>點擊「確認」添加動作</li>
+                            </ol>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-3">步驟 4：設置新聞整理格式</h3>
+                            <p class="mb-4">使用 Coze 的格式化功能，將收集到的新聞整理成易讀的格式：</p>
+                            <ol class="list-decimal pl-6 mb-6 space-y-2">
+                                <li>點擊「+ 添加動作」，選擇「格式化工具」</li>
+                                <li>選擇「文本格式化」功能</li>
+                                <li>在模板中輸入：
+                                    <div class="bg-gray-50 p-3 rounded text-sm my-2">
+                                        # 今日台灣新聞彙總 ({{date}})
+
+                                        {{#each categories}}
+                                        ## {{category_name}}
+                                        {{#each news}}
+                                        - {{title}} (來源：{{source}})
+                                          {{summary}}
+                                          閱讀全文：{{url}}
+                                        {{/each}}
+                                        {{/each}}
+
+                                        本新聞彙總由 Coze 自動生成
+                                    </div>
+                                </li>
+                                <li>點擊「確認」完成設定</li>
+                            </ol>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-3">步驟 5：設置通知方式</h3>
+                            <p class="mb-4">選擇你偏好的方式接收新聞彙總：</p>
+                            
+                            <h4 class="text-lg font-medium mt-4 mb-2">透過 Email 接收</h4>
+                            <ol class="list-decimal pl-6 mb-6 space-y-2">
+                                <li>點擊「+ 添加動作」，選擇「Email 插件」</li>
+                                <li>輸入收件人信箱</li>
+                                <li>標題：「每日台灣新聞彙總 - {{date}}」</li>
+                                <li>內容：選擇步驟 4 中格式化的文本</li>
+                                <li>點擊「確認」完成設定</li>
+                            </ol>
+                            
+                            <h4 class="text-lg font-medium mt-4 mb-2">透過 LINE 接收</h4>
+                            <p class="mb-2">由於 LINE 對長文本有長度限制，建議只發送標題和鏈接：</p>
+                            <ol class="list-decimal pl-6 mb-6 space-y-2">
+                                <li>點擊「+ 添加動作」，選擇「LINE 通知插件」</li>
+                                <li>訊息內容使用簡化模板：
+                                    <div class="bg-gray-50 p-3 rounded text-sm my-2">
+                                        今日新聞彙總：
+                                        {{#each categories}}
+                                        {{category_name}}：
+                                        {{#each news}}
+                                        - {{title}} {{url}}
+                                        {{/each}}
+                                        {{/each}}
+                                    </div>
+                                </li>
+                                <li>點擊「確認」完成設定</li>
+                            </ol>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-3">步驟 6：測試與啟動</h3>
+                            <ol class="list-decimal pl-6 mb-6 space-y-2">
+                                <li>點擊「測試」按鈕，檢查新聞收集和通知是否正常</li>
+                                <li>若測試成功，點擊「啟動」按鈕啟用工作流</li>
+                            </ol>
+
+                            <div class="bg-blue-50 p-6 rounded-xl border border-blue-100 mt-10">
+                                <h3 class="text-xl font-bold text-primary mb-3">自定義建議</h3>
+                                <p class="text-gray-700 mb-4">
+                                    根據個人需求，你可以這樣調整工作流：
+                                </p>
+                                <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                                    <li><strong>關鍵字過濾</strong>：添加特定關鍵字（如「科技」、「健康」），只收集相關新聞</li>
+                                    <li><strong>重點新聞標記</strong>：設定重要程度評分，標記值得優先閱讀的新聞</li>
+                                    <li><strong>周末模式</strong>：設定周末只收集娛樂、體育等輕鬆內容</li>
+                                    <li><strong>多管道發送</strong>：同時發送到 Email 和 LINE，確保不會錯過</li>
+                                </ul>
+                            </div>
+                        </article>
+
+                        <!-- 分享按钮 -->
+                        <div class="mt-10 flex flex-wrap items-center gap-4">
+                            <p class="text-gray-600">分享這篇文章：</p>
+                            <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-custom">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                            <a href="#" class="bg-sky-500 hover:bg-sky-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition-custom">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                            <a href="#" class="bg-green-500 hover:bg-green-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition-custom">
+                                <i class="fa fa-line"></i>
+                            </a>
+                            <a href="#" class="bg-gray-700 hover:bg-gray-800 text-white w-10 h-10 rounded-full flex items-center justify-center transition-custom">
+                                <i class="fa fa-copy"></i>
+                            </a>
+                        </div>
+
+                        <!-- 相关文章 -->
+                        <div class="mt-16">
+                            <h3 class="text-xl font-bold text-dark mb-6">相關教學</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <a href="/articles/3-minute-coze-workflow-weather.html" class="flex gap-4 group">
+                                    <img src="https://picsum.photos/id/175/300/200" alt="3 分鐘學會 Coze Workflow" class="w-32 h-24 object-cover rounded-lg flex-shrink-0">
+                                    <div>
+                                        <h4 class="font-medium text-dark group-hover:text-primary transition-custom">3 分鐘學會 Coze Workflow：台灣天氣提醒案例</h4>
+                                        <p class="text-sm text-gray-500 mt-1">快速建立另一個實用工作流...</p>
+                                    </div>
+                                </a>
+                                <a href="/articles/coze-plugins-taiwan.html" class="flex gap-4 group">
+                                    <img src="https://picsum.photos/id/2/300/200" alt="Coze 插件推薦" class="w-32 h-24 object-cover rounded-lg flex-shrink-0">
+                                    <div>
+                                        <h4 class="font-medium text-dark group-hover:text-primary transition-custom">Coze 插件推薦：台灣常用工具整合</h4>
+                                        <p class="text-sm text-gray-500 mt-1">探索更多實用的台灣插件...</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 侧边栏 -->
+                    <div class="lg:w-1/3">
+                        <!-- 作者信息 -->
+                        <div class="bg-gray-50 rounded-xl p-6 mb-8">
+                            <div class="flex items-center mb-4">
+                                <img src="https://picsum.photos/id/64/200/200" alt="作者頭像" class="w-16 h-16 rounded-full mr-4">
+                                <div>
+                                    <h3 class="font-bold text-dark">CozeTW 團隊</h3>
+                                    <p class="text-gray-600 text-sm">AI 應用研究員</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4">
+                                專注於 Coze 在台灣的應用與推廣，幫助用戶掌握 AI 工具，提升工作效率。
+                            </p>
+                            <a href="/about.html" class="text-primary hover:underline text-sm">查看更多關於我們</a>
+                        </div>
+
+                        <!-- 下载模板 -->
+                        <div class="bg-primary rounded-xl p-6 mb-8 text-white">
+                            <h3 class="font-bold text-lg mb-3">下載新聞彙總模板</h3>
+                            <p class="text-white/80 text-sm mb-4">
+                                直接導入此模板，快速建立你的每日新聞彙總工作流
+                            </p>
+                            <button class="w-full bg-white text-primary hover:bg-gray-100 py-3 rounded-lg transition-custom flex items-center justify-center font-medium">
+                                <i class="fa fa-download mr-2"></i> 免費下載模板
+                            </button>
+                        </div>
+
+                        <!-- 常见问题 -->
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8">
+                            <h3 class="font-bold text-dark text-lg mb-4">常見問題</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="font-medium text-dark mb-1">可以選擇特定的新聞媒體嗎？</h4>
+                                    <p class="text-gray-600 text-sm">是的，台灣新聞彙集插件支援選擇特定媒體，如聯合報、中國時報、自由時報等。</p>
+                                </div>
+                                <div class="w-full h-px bg-gray-100"></div>
+                                <div>
+                                    <h4 class="font-medium text-dark mb-1">新聞彙總會包含廣告嗎？</h4>
+                                    <p class="text-gray-600 text-sm">不會，插件會自動過濾廣告內容，只保留新聞本身。</p>
+                                </div>
+                                <div class="w-full h-px bg-gray-100"></div>
+                                <div>
+                                    <h4 class="font-medium text-dark mb-1">可以設定只接收特定類別的新聞嗎？</h4>
+                                    <p class="text-gray-600 text-sm">當然可以，在設置新聞收集動作時，你可以選擇只收集你感興趣的類別。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-gray-300 py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fa fa-robot text-primary text-2xl mr-2"></i>

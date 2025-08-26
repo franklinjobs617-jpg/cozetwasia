@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CozeTW.asia - 台灣最完整的 Coze 教學資源平台，提供 Coze 入門教程、工作流範例與實戰案例。">
+    <meta name="keywords" content="Coze, Coze 教學, AI 助理, 工作流自動化, Coze 台灣">
+    <title>CozeTW.asia | 台灣 Coze 教學資源平台</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        dark: '#1E293B',
+                        light: '#F8FAFC'
+                    },
+                    fontFamily: { sans: ['Noto Sans TC', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .transition-custom {
+                transition: all 0.3s ease;
+            }
+            .card-hover {
+                @apply hover:shadow-md hover:-translate-y-1 transition-custom;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-light text-dark">
+    <!-- 导航栏 -->
+    <header class="sticky top-0 bg-white shadow-sm z-50 transition-custom">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="/" class="flex items-center">
+                    <i class="fa fa-robot text-primary text-2xl mr-2"></i>
+                    <span class="text-xl font-bold">CozeTW</span>
+                </a>
+                
+                <!-- 桌面端菜单 -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="/" class="text-primary font-medium">首頁</a>
+                    <a href="/article.html" class="hover:text-primary transition-custom">Coze 教學</a>
+                    <a href="/workflow-examples.html" class="hover:text-primary transition-custom">工作流範例</a>
+                    <a href="/faq.html" class="hover:text-primary transition-custom">常見問題</a>
+                    <a href="/contact.html" class="hover:text-primary transition-custom">聯絡我們</a>
+                </nav>
+                
+                <!-- 移动端菜单按钮 -->
+                <button id="menu-toggle" class="md:hidden text-dark">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- 移动端菜单 -->
+            <div id="mobile-menu" class="md:hidden hidden pb-4">
+                <a href="/" class="block py-2 text-primary font-medium">首頁</a>
+                <a href="/article.html" class="block py-2 hover:text-primary transition-custom">Coze 教學</a>
+                <a href="/workflow-examples.html" class="block py-2 hover:text-primary transition-custom">工作流範例</a>
+                <a href="/faq.html" class="block py-2 hover:text-primary transition-custom">常見問題</a>
+                <a href="/privacy.html" class="block py-2 hover:text-primary transition-custom">隱私政策</a>
+                <a href="/terms.html" class="block py-2 hover:text-primary transition-custom">服務條款</a>
+                <a href="/sitemap.html" class="block py-2 hover:text-primary transition-custom">網站地圖</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="bg-gradient-to-br from-primary/90 to-primary text-white py-20">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Coze 教學資源平台</h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-90">台灣用戶最完整的 Coze 學習指南，從入門到精通，輕鬆打造 AI 助理與自動化工作流</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="/article.html" class="bg-white text-primary px-8 py-3 rounded-full font-medium hover:bg-opacity-90 transition-custom">
+                        開始學習 <i class="fa fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="/workflow-examples.html" class="bg-transparent border-2 border-white px-8 py-3 rounded-full font-medium hover:bg-white/10 transition-custom">
+                        查看工作流範例
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特色介绍 -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">為什麼選擇 CozeTW？</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">我們提供台灣用戶最需要的 Coze 教學資源，解決語言障礙與在地化挑戰</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-light p-8 rounded-xl shadow-sm card-hover">
+                    <div class="bg-primary/10 w-14 h-14 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-language text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">全中文教學</h3>
+                    <p class="text-gray-600">以繁體中文撰寫的 Coze 教學內容，解決語言障礙，讓台灣用戶輕鬆學習。</p>
+                </div>
+                
+                <div class="bg-light p-8 rounded-xl shadow-sm card-hover">
+                    <div class="bg-primary/10 w-14 h-14 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-map-marker-alt text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">在地化範例</h3>
+                    <p class="text-gray-600">針對台灣用戶需求設計的實戰案例，包括天氣查詢、捷運時刻表等在地服務。</p>
+                </div>
+                
+                <div class="bg-light p-8 rounded-xl shadow-sm card-hover">
+                    <div class="bg-primary/10 w-14 h-14 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-code text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">可直接套用</h3>
+                    <p class="text-gray-600">提供完整的工作流範本與程式碼，複製即可使用，節省開發時間。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 热门教程 -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-end mb-10">
+                <div>
+                    <h2 class="text-3xl font-bold mb-4">熱門 Coze 教學</h2>
+                    <p class="text-gray-600">精選最受台灣用戶歡迎的 Coze 教學文章，從入門到進階</p>
+                </div>
+                <a href="/article.html" class="hidden md:block text-primary font-medium hover:underline">
+                    查看全部 <i class="fa fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 教程1 -->
+                <article class="bg-white rounded-xl shadow-sm overflow-hidden card-hover">
+                    <a href="/articles/coze-guide.html">
+                        <img src="https://picsum.photos/id/0/600/400" alt="Coze入門教學" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="inline-block bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">入門指南</span>
+                                <span class="text-gray-500 text-sm">2024-05-10</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Coze 入門：AI 助理製作與自動化</h3>
+                            <p class="text-gray-600 mb-4">從註冊到實戰，手把手教你使用 Coze 平台，適合新手快速上手。</p>
+                            <div class="flex items-center text-primary font-medium">
+                                <span>閱讀更多</span>
+                                <i class="fa fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                
+                <!-- 教程2 -->
+                <article class="bg-white rounded-xl shadow-sm overflow-hidden card-hover">
+                    <a href="/articles/coze-weather-reminder.html">
+                        <img src="https://picsum.photos/id/180/600/400" alt="台灣天氣提醒案例" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="inline-block bg-secondary/10 text-secondary px-3 py-1 rounded-full text-sm">實戰案例</span>
+                                <span class="text-gray-500 text-sm">2024-05-15</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">3 分鐘學會 Coze Workflow：台灣天氣提醒</h3>
+                            <p class="text-gray-600 mb-4">製作自動天氣提醒機器人，每天定時推送台灣各地天氣預報。</p>
+                            <div class="flex items-center text-primary font-medium">
+                                <span>閱讀更多</span>
+                                <i class="fa fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                
+                <!-- 教程3 -->
+                <article class="bg-white rounded-xl shadow-sm overflow-hidden card-hover">
+                    <a href="/articles/coze-advanced-workflow.html">
+                        <img src="https://picsum.photos/id/160/600/400" alt="Workflow進階技巧" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="inline-block bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">工作流技巧</span>
+                                <span class="text-gray-500 text-sm">2024-06-10</span>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Coze Workflow 進階技巧：條件判斷與循環</h3>
+                            <p class="text-gray-600 mb-4">深入學習 Coze 工作流的條件分支、循環執行與錯誤處理。</p>
+                            <div class="flex items-center text-primary font-medium">
+                                <span>閱讀更多</span>
+                                <i class="fa fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+            </div>
+            
+            <div class="text-center mt-10 md:hidden">
+                <a href="/article.html" class="inline-block text-primary font-medium hover:underline">
+                    查看全部教學文章 <i class="fa fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 工作流范例 -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-end mb-10">
+                <div>
+                    <h2 class="text-3xl font-bold mb-4">實用工作流範例</h2>
+                    <p class="text-gray-600">台灣用戶常用的 Coze 自動化工作流，可直接複製修改使用</p>
+                </div>
+                <a href="/workflow-examples.html" class="hidden md:block text-primary font-medium hover:underline">
+                    更多範例 <i class="fa fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 工作流1 -->
+                <div class="bg-light p-6 rounded-xl shadow-sm card-hover">
+                    <div class="flex items-start">
+                        <div class="bg-primary/10 p-3 rounded-full mr-4 mt-1">
+                            <i class="fa fa-cloud text-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">台灣天氣自動提醒</h3>
+                            <p class="text-gray-600 mb-4">每日早上 7 點自動查詢台灣各地天氣，並透過 LINE 發送提醒訊息。</p>
+                            <a href="/articles/coze-weather-reminder.html" class="text-primary font-medium hover:underline">
+                                查看詳細教程
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 工作流2 -->
+                <div class="bg-light p-6 rounded-xl shadow-sm card-hover">
+                    <div class="flex items-start">
+                        <div class="bg-primary/10 p-3 rounded-full mr-4 mt-1">
+                            <i class="fa fa-newspaper text-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">每日新聞彙總</h3>
+                            <p class="text-gray-600 mb-4">自動收集台灣主要新聞媒體頭條，按類別分類後發送精選內容。</p>
+                            <a href="/articles/coze-news-summary.html" class="text-primary font-medium hover:underline">
+                                查看詳細教程
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 工作流3 -->
+                <div class="bg-light p-6 rounded-xl shadow-sm card-hover">
+                    <div class="flex items-start">
+                        <div class="bg-primary/10 p-3 rounded-full mr-4 mt-1">
+                            <i class="fa fa-utensils text-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">餐廳訂位管理</h3>
+                            <p class="text-gray-600 mb-4">透過 LINE 接收訂位請求，自動檢查空位狀況，回復確認訊息。</p>
+                            <a href="/articles/coze-restaurant-reservation.html" class="text-primary font-medium hover:underline">
+                                查看詳細教程
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 工作流4 -->
+                <div class="bg-light p-6 rounded-xl shadow-sm card-hover">
+                    <div class="flex items-start">
+                        <div class="bg-primary/10 p-3 rounded-full mr-4 mt-1">
+                            <i class="fa fa-book text-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">家庭作業提醒</h3>
+                            <p class="text-gray-600 mb-4">定時提醒孩子完成作業，並在完成後通知家長，記錄完成狀況。</p>
+                            <a href="/articles/coze-homework-reminder.html" class="text-primary font-medium hover:underline">
+                                查看詳細教程
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10 md:hidden">
+                <a href="/workflow-examples.html" class="inline-block text-primary font-medium hover:underline">
+                    查看更多工作流範例 <i class="fa fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 订阅区域 -->
+    <section class="py-16 bg-primary text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-2xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-4">訂閱 Coze 教學資訊</h2>
+                <p class="mb-8 opacity-90">第一時間獲取最新的 Coze 教學文章、工作流範例與實用技巧</p>
+                <form class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+                    <input type="email" placeholder="輸入您的信箱" class="flex-1 px-4 py-3 rounded-full text-dark focus:outline-none focus:ring-2 focus:ring-white">
+                    <button type="submit" class="bg-dark text-white px-6 py-3 rounded-full font-medium hover:bg-opacity-90 transition-custom">
+                        立即訂閱
+                    </button>
+                </form>
+                <p class="mt-4 text-sm opacity-80">我們重視您的隱私，不會分享您的個人資訊</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-gray-300 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fa fa-robot text-primary text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-white">CozeTW</span>
+                    </div>
+                    <p class="mb-4">台灣最完整的 Coze 教學資源，幫助您輕鬆掌握 AI 助理製作與自動化技巧。</p>
+                    <div class="flex space-x-4">
+                        <a href="https://facebook.com/cozetw" class="text-gray-400 hover:text-primary transition-custom"><i class="fa fa-facebook"></i></a>
+                        <a href="https://twitter.com/cozetw" class="text-gray-400 hover:text-primary transition-custom"><i class="fa fa-twitter"></i></a>
+                        <a href="https://instagram.com/cozetw" class="text-gray-400 hover:text-primary transition-custom"><i class="fa fa-instagram"></i></a>
+                        <a href="https://youtube.com/cozetw" class="text-gray-400 hover:text-primary transition-custom"><i class="fa fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">快速連結</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/" class="hover:text-primary transition-custom">首頁</a></li>
+                        <li><a href="/article.html" class="hover:text-primary transition-custom">Coze 教學</a></li>
+                        <li><a href="/workflow-examples.html" class="hover:text-primary transition-custom">工作流範例</a></li>
+                        <li><a href="/faq.html" class="hover:text-primary transition-custom">常見問題</a></li>
+                        <li><a href="/sitemap.html" class="hover:text-primary transition-custom">網站地圖</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-semibold mb-4">教學資源</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/articles/coze-guide.html" class="hover:text-primary transition-custom">Coze 入門教程</a></li>
+                        <li><a href="/articles/coze-advanced-workflow.html" class="hover:text-primary transition-custom">Workflow 進階技巧</a></li>
+                        <li><a href="/articles/coze-plugin-guide.html" class="hover:text-primary transition-custom">插件安裝教學</a></li>
+                        <li><a href="/articles/taiwan-case-studies.html" class="hover:text-primary transition-custom">台灣案例分享</a></li>
+                        <li><a href="/articles/coze-prompt-tips.html" class="hover:text-primary transition-custom">提示詞模板</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-semibold mb-4">法律資訊</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/privacy.html" class="hover:text-primary transition-custom">隱私政策</a></li>
+                        <li><a href="/terms.html" class="hover:text-primary transition-custom">服務條款</a></li>
+                        <li><a href="/disclaimer.html" class="hover:text-primary transition-custom">免責聲明</a></li>
+                        <li><a href="/copyright.html" class="hover:text-primary transition-custom">著作權聲明</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8 text-center text-sm">
+                <p>&copy; 2024 CozeTW.asia 版權所有 | 台灣 Coze 教學資源平台</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // 滚动时导航栏效果
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 10) {
+                header.classList.add('shadow');
+            } else {
+                header.classList.remove('shadow');
+            }
+        });
+    </script>
+</body>
+</html>
