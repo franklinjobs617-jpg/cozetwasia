@@ -1,226 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-    
-    <!-- 核心首页 -->
-    <url>
-        <loc>https://www.cozetw.asia/</loc>
-        <lastmod>2024-06-30T00:00:00+08:00</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>1.0</priority>
-        <image:image>
-            <image:loc>https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/87ea522e6ab544ff9a43df2c8a97df7c.png</image:loc>
-            <image:caption>CozeTW 首页封面图</image:caption>
-            <image:title>CozeTW 首页</image:title>
-        </image:image>
-    </url>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
-    <!-- 一级功能页面 -->
-    <url>
-        <loc>https://www.cozetw.asia/article.html</loc>
-        <lastmod>2024-06-25T00:00:00+08:00</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-        <image:image>
-            <image:loc>https://picsum.photos/id/0/1200/630</image:loc>
-            <image:caption>Coze 教学文章列表</image:caption>
-            <image:title>Coze 教学文章</image:title>
-        </image:image>
-    </url>
 
-    <url>
-        <loc>https://www.cozetw.asia/workflow-examples.html</loc>
-        <lastmod>2024-06-20T00:00:00+08:00</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
+<url>
+  <loc>https://www.cozetw.asia/</loc>
+  <lastmod>2025-08-26T11:38:18+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://www.cozetw.asia/article.html</loc>
+  <lastmod>2025-08-26T11:38:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.cozetw.asia/workflow-examples.html</loc>
+  <lastmod>2025-08-26T11:38:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.cozetw.asia/faq.html</loc>
+  <lastmod>2025-08-26T11:38:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.cozetw.asia/contact.html</loc>
+  <lastmod>2025-08-26T11:38:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.cozetw.asia/privacy.html</loc>
+  <lastmod>2025-08-26T11:38:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.cozetw.asia/terms.html</loc>
+  <lastmod>2025-08-26T11:38:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.cozetw.asia/articles/coze-guide.html</loc>
+  <lastmod>2025-08-26T11:38:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.cozetw.asia/articles/coze-weather-reminder.html</loc>
+  <lastmod>2025-08-26T11:38:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.cozetw.asia/articles/coze-advanced-workflow.html</loc>
+  <lastmod>2025-08-26T11:38:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.cozetw.asia/articles/coze-news-summary.html</loc>
+  <lastmod>2025-08-26T11:38:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.cozetw.asia/articles/coze-restaurant-reservation.html</loc>
+  <lastmod>2025-08-26T11:38:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.cozetw.asia/articles/coze-homework-reminder.html</loc>
+  <lastmod>2025-08-26T11:38:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.cozetw.asia/articles/coze-plugin-guide.html</loc>
+  <lastmod>2025-08-26T11:38:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.cozetw.asia/articles/taiwan-case-studies.html</loc>
+  <lastmod>2025-08-26T11:38:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.cozetw.asia/articles/coze-prompt-tips.html</loc>
+  <lastmod>2025-08-26T11:38:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.cozetw.asia/disclaimer.html</loc>
+  <lastmod>2025-08-26T11:38:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.cozetw.asia/copyright.html</loc>
+  <lastmod>2025-08-26T11:38:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.cozetw.asia/articles/taiwan-plugin-recommendations.html</loc>
+  <lastmod>2025-08-26T11:38:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.cozetw.asia/articles/coze-finance-tracker.html</loc>
+  <lastmod>2025-08-26T11:38:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
 
-    <url>
-        <loc>https://www.cozetw.asia/faq.html</loc>
-        <lastmod>2024-06-15T00:00:00+08:00</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
 
-    <url>
-        <loc>https://www.cozetw.asia/contact.html</loc>
-        <lastmod>2024-06-10T00:00:00+08:00</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-
-    <url>
-        <loc>https://www.cozetw.asia/about.html</loc>
-        <lastmod>2024-06-05T00:00:00+08:00</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-
-    <url>
-        <loc>https://www.cozetw.asia/privacy.html</loc>
-        <lastmod>2024-05-20T00:00:00+08:00</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
-    </url>
-
-    <url>
-        <loc>https://www.cozetw.asia/terms.html</loc>
-        <lastmod>2024-05-20T00:00:00+08:00</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
-    </url>
-
-    <url>
-        <loc>https://www.cozetw.asia/disclaimer.html</loc>
-        <lastmod>2024-05-20T00:00:00+08:00</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.4</priority>
-    </url>
-
-    <url>
-        <loc>https://www.cozetw.asia/copyright.html</loc>
-        <lastmod>2024-05-20T00:00:00+08:00</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.4</priority>
-    </url>
-
-    <url>
-        <loc>https://www.cozetw.asia/sitemap.html</loc>
-        <lastmod>2024-06-30T00:00:00+08:00</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.4</priority>
-    </url>
-
-    <!-- 教学文章详情页（articles 目录） -->
-    <url>
-        <loc>https://www.cozetw.asia/articles/coze-guide.html</loc>
-        <lastmod>2024-06-25T00:00:00+08:00</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-        <image:image>
-            <image:loc>https://picsum.photos/id/0/1200/630</image:loc>
-            <image:caption>Coze 入门教程：AI 助理制作与自动化</image:caption>
-            <image:title>Coze 入门教程</image:title>
-        </image:image>
-    </url>
-
-    <url>
-        <loc>https://www.cozetw.asia/articles/coze-finance-tracker.html</loc>
-        <lastmod>2024-06-30T00:00:00+08:00</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-        <image:image>
-            <image:loc>https://picsum.photos/id/180/1200/630</image:loc>
-            <image:caption>Coze 家庭财务追踪系统</image:caption>
-            <image:title>家庭财务追踪系统</image:title>
-        </image:image>
-    </url>
-
-    <url>
-        <loc>https://www.cozetw.asia/articles/coze-homework-reminder.html</loc>
-        <lastmod>2024-06-20T00:00:00+08:00</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-        <image:image>
-            <image:loc>https://picsum.photos/id/20/1200/630</image:loc>
-            <image:caption>Coze 作业提醒机器人</image:caption>
-            <image:title>作业提醒机器人</image:title>
-        </image:image>
-    </url>
-
-    <url>
-        <loc>https://www.cozetw.asia/articles/coze-weather-reminder.html</loc>
-        <lastmod>2024-06-15T00:00:00+08:00</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-        <image:image>
-            <image:loc>https://picsum.photos/id/180/1200/630</image:loc>
-            <image:caption>台湾天气提醒机器人</image:caption>
-            <image:title>天气提醒机器人</image:title>
-        </image:image>
-    </url>
-
-    <url>
-        <loc>https://www.cozetw.asia/articles/coze-news-summary.html</loc>
-        <lastmod>2024-06-10T00:00:00+08:00</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-        <image:image>
-            <image:loc>https://picsum.photos/id/24/1200/630</image:loc>
-            <image:caption>每日台湾新闻汇总</image:caption>
-            <image:title>台湾新闻汇总</image:title>
-        </image:image>
-    </url>
-
-    <url>
-        <loc>https://www.cozetw.asia/articles/coze-restaurant-reservation.html</loc>
-        <lastmod>2024-06-05T00:00:00+08:00</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-        <image:image>
-            <image:loc>https://picsum.photos/id/292/1200/630</image:loc>
-            <image:caption>餐厅 LINE 订位机器人</image:caption>
-            <image:title>餐厅订位机器人</image:title>
-        </image:image>
-    </url>
-
-    <url>
-        <loc>https://www.cozetw.asia/articles/coze-advanced-workflow.html</loc>
-        <lastmod>2024-06-01T00:00:00+08:00</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-        <image:image>
-            <image:loc>https://picsum.photos/id/160/1200/630</image:loc>
-            <image:caption>Coze Workflow 进阶技巧</image:caption>
-            <image:title>Workflow 进阶技巧</image:title>
-        </image:image>
-    </url>
-
-    <url>
-        <loc>https://www.cozetw.asia/articles/coze-plugin-guide.html</loc>
-        <lastmod>2024-05-25T00:00:00+08:00</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-        <image:image>
-            <image:loc>https://picsum.photos/id/48/1200/630</image:loc>
-            <image:caption>Coze 插件安装指南</image:caption>
-            <image:title>插件安装指南</image:title>
-        </image:image>
-    </url>
-
-    <url>
-        <loc>https://www.cozetw.asia/articles/taiwan-plugin-recommendations.html</loc>
-        <lastmod>2024-05-20T00:00:00+08:00</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-        <image:image>
-            <image:loc>https://picsum.photos/id/366/1200/630</image:loc>
-            <image:caption>台湾常用 Coze 插件推荐</image:caption>
-            <image:title>台湾插件推荐</image:title>
-        </image:image>
-    </url>
-
-    <url>
-        <loc>https://www.cozetw.asia/articles/taiwan-case-studies.html</loc>
-        <lastmod>2024-05-15T00:00:00+08:00</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-        <image:image>
-            <image:loc>https://picsum.photos/id/119/1200/630</image:loc>
-            <image:caption>Coze 台湾案例分享</image:caption>
-            <image:title>台湾案例分享</image:title>
-        </image:image>
-    </url>
-
-    <url>
-        <loc>https://www.cozetw.asia/articles/coze-prompt-tips.html</loc>
-        <lastmod>2024-05-10T00:00:00+08:00</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-        <image:image>
-            <image:loc>https://picsum.photos/id/99/1200/630</image:loc>
-            <image:caption>Coze 提示词模板</image:caption>
-            <image:title>提示词模板</image:title>
-        </image:image>
-    </url>
 </urlset>
