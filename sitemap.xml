@@ -6,107 +6,125 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
-
 <url>
   <loc>https://www.cozetw.asia/</loc>
   <lastmod>2025-08-26T11:38:18+00:00</lastmod>
+  <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://www.cozetw.asia/article.html</loc>
   <lastmod>2025-08-26T11:38:19+00:00</lastmod>
-  <priority>0.80</priority>
+  <changefreq>weekly</changefreq>
+  <priority>0.90</priority>
 </url>
 <url>
   <loc>https://www.cozetw.asia/workflow-examples.html</loc>
   <lastmod>2025-08-26T11:38:19+00:00</lastmod>
-  <priority>0.80</priority>
+  <changefreq>weekly</changefreq>
+  <priority>0.90</priority>
 </url>
 <url>
   <loc>https://www.cozetw.asia/faq.html</loc>
   <lastmod>2025-08-26T11:38:19+00:00</lastmod>
+  <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.cozetw.asia/contact.html</loc>
   <lastmod>2025-08-26T11:38:19+00:00</lastmod>
+  <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.cozetw.asia/privacy.html</loc>
   <lastmod>2025-08-26T11:38:19+00:00</lastmod>
-  <priority>0.80</priority>
+  <changefreq>yearly</changefreq>
+  <priority>0.50</priority>
 </url>
 <url>
   <loc>https://www.cozetw.asia/terms.html</loc>
   <lastmod>2025-08-26T11:38:19+00:00</lastmod>
-  <priority>0.80</priority>
+  <changefreq>yearly</changefreq>
+  <priority>0.50</priority>
 </url>
 <url>
   <loc>https://www.cozetw.asia/articles/coze-guide.html</loc>
   <lastmod>2025-08-26T11:38:20+00:00</lastmod>
+  <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.cozetw.asia/articles/coze-weather-reminder.html</loc>
   <lastmod>2025-08-26T11:38:20+00:00</lastmod>
+  <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.cozetw.asia/articles/coze-advanced-workflow.html</loc>
   <lastmod>2025-08-26T11:38:20+00:00</lastmod>
+  <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.cozetw.asia/articles/coze-news-summary.html</loc>
   <lastmod>2025-08-26T11:38:20+00:00</lastmod>
+  <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.cozetw.asia/articles/coze-restaurant-reservation.html</loc>
   <lastmod>2025-08-26T11:38:20+00:00</lastmod>
+  <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.cozetw.asia/articles/coze-homework-reminder.html</loc>
   <lastmod>2025-08-26T11:38:20+00:00</lastmod>
+  <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.cozetw.asia/articles/coze-plugin-guide.html</loc>
   <lastmod>2025-08-26T11:38:20+00:00</lastmod>
+  <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.cozetw.asia/articles/taiwan-case-studies.html</loc>
   <lastmod>2025-08-26T11:38:21+00:00</lastmod>
-  <priority>0.80</priority>
+  <changefreq>monthly</changefreq>
+  <priority>0.70</priority>
 </url>
 <url>
   <loc>https://www.cozetw.asia/articles/coze-prompt-tips.html</loc>
   <lastmod>2025-08-26T11:38:21+00:00</lastmod>
-  <priority>0.80</priority>
+  <changefreq>monthly</changefreq>
+  <priority>0.70</priority>
 </url>
 <url>
   <loc>https://www.cozetw.asia/disclaimer.html</loc>
   <lastmod>2025-08-26T11:38:21+00:00</lastmod>
-  <priority>0.80</priority>
+  <changefreq>yearly</changefreq>
+  <priority>0.50</priority>
 </url>
 <url>
   <loc>https://www.cozetw.asia/copyright.html</loc>
   <lastmod>2025-08-26T11:38:21+00:00</lastmod>
-  <priority>0.80</priority>
+  <changefreq>yearly</changefreq>
+  <priority>0.50</priority>
 </url>
 <url>
   <loc>https://www.cozetw.asia/articles/taiwan-plugin-recommendations.html</loc>
   <lastmod>2025-08-26T11:38:21+00:00</lastmod>
-  <priority>0.64</priority>
+  <changefreq>monthly</changefreq>
+  <priority>0.70</priority>
 </url>
 <url>
   <loc>https://www.cozetw.asia/articles/coze-finance-tracker.html</loc>
   <lastmod>2025-08-26T11:38:21+00:00</lastmod>
-  <priority>0.64</priority>
+  <changefreq>monthly</changefreq>
+  <priority>0.70</priority>
 </url>
-
 
 </urlset>
